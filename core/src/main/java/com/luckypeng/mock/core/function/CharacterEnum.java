@@ -1,4 +1,4 @@
-package com.luckypeng.mock.core.util;
+package com.luckypeng.mock.core.function;
 
 import lombok.Getter;
 import org.apache.commons.lang3.EnumUtils;

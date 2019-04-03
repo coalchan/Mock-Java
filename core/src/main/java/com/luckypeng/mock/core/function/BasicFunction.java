@@ -2,7 +2,6 @@ package com.luckypeng.mock.core.function;
 
 import com.luckypeng.mock.core.schema.Function;
 import com.luckypeng.mock.core.schema.FunctionInfo;
-import com.luckypeng.mock.core.util.CharacterEnum;
 import org.apache.commons.lang3.RandomUtils;
 
 import java.math.BigDecimal;
