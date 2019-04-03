@@ -30,4 +30,20 @@ public class ObjectUtils {
         // else
         return false;
     }
+
+    public static Integer parseInt(String s) {
+        try {
+            return Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    public static Long parseLong(String s) {
+        try {
+            return Long.parseLong(s);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
 }
