@@ -4,7 +4,11 @@ import com.luckypeng.mock.core.io.ClassScanner;
 import com.luckypeng.mock.core.schema.Function;
 import com.luckypeng.mock.core.schema.FunctionInfo;
 import com.luckypeng.mock.core.schema.MockFunction;
+import com.luckypeng.mock.core.schema.ParamType;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +19,7 @@ import java.util.stream.Collectors;
  * @author coalchan
  * @date 2019/4/2
  */
+@Slf4j
 public class FunctionHelper {
     private FunctionHelper() {}
 
@@ -36,5 +41,66 @@ public class FunctionHelper {
                     return functions.stream();
                 })
                 .collect(Collectors.groupingBy(MockFunction::getName));
+    }
+
+    /**
+     * 执行函数表达式
+     * @param funcExpression
+     * @return
+     */
+    public static Object execFunction(String funcExpression) {
+        int bracketIndex = funcExpression.indexOf('(');
+        String funcName = funcExpression.substring(0, bracketIndex);
+        Object[] params = resolveParams(funcExpression.substring(bracketIndex+1, funcExpression.length()-1));
+
+        List<MockFunction> functions = MOCK_FUNCTIONS.get(funcName);
+        AssertionUtils.notEmpty(functions, "不支持该函数: " + funcName);
+        for (MockFunction function: functions) {
+            boolean isFit = true;
+            Class[] classes = function.getMethod().getParameterTypes();
+            // 参数个数检查
+            if (params.length == classes.length) {
+                for (int i = 0; i < params.length; i++) {
+                    // 参数类型检查
+                    if(!ParamType.isFitType(params[i], classes[i])) {
+                        isFit = false;
+                    }
+                }
+            } else {
+                isFit = false;
+            }
+            if (isFit) {
+                log.debug("已找到对应的函数: " + function.toString());
+                try {
+                    return function.getMethod().invoke(null, params);
+                } catch (IllegalAccessException|InvocationTargetException e) {
+                    throw new RuntimeException("函数执行出错: " + funcName);
+                }
+            }
+        }
+        throw new RuntimeException("该函数没有匹配的参数类型: " + funcName);
+    }
+
+    /**
+     * @param paramStr e.g. true,1,10.1
+     * @return
+     */
+    private static Object[] resolveParams(String paramStr) {
+        Object[] params = null;
+        if (StringUtils.isNotEmpty(paramStr)) {
+            String[] paramStrArray = paramStr.split(" *, *");
+            params = new Object[paramStrArray.length];
+            for (int i = 0; i < paramStrArray.length; i++) {
+                paramStrArray[i] = paramStrArray[i].trim();
+                if (paramStrArray[i].charAt(0) == '\'') {
+                    // 函数参数为字符串
+                    params[i] = paramStrArray[i].substring(1, paramStrArray[i].length()-1);
+                } else {
+                    // 其他
+                    params[i] = ParamType.toSpecificType(paramStrArray[i]);
+                }
+            }
+        }
+        return params;
     }
 }

@@ -26,6 +26,4 @@ public class MockFunction {
      * 对应的方法
      */
     private Method method;
-
-
 }
