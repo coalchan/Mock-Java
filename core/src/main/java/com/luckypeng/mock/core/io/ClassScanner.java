@@ -1,8 +1,12 @@
 package com.luckypeng.mock.core.io;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -14,6 +18,7 @@ import java.util.stream.Collectors;
  * @author coalchan
  * @date 2019/4/2
  */
+@Slf4j
 public class ClassScanner {
     /**
      * 查询指定包下带有指定注解的所有类
@@ -72,7 +77,13 @@ public class ClassScanner {
                     list = scanJar(path, packagePath);
                     break;
                 case FILE:
-                    list = scanFile(u.getPath(), packageName);
+                    String filePath;
+                    try {
+                        filePath = URLDecoder.decode(u.getPath(), "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        throw new RuntimeException("URLDecoder.decode URL 失败: ", e);
+                    }
+                    list = scanFile(filePath, packageName);
                     break;
             }
         }
@@ -163,6 +174,8 @@ public class ClassScanner {
                     classNameList.add(result);
                 }
             }
+        } else {
+            log.warn(path + " 目录下没有文件！");
         }
 
         return classNameList;
