@@ -46,4 +46,13 @@ public class ObjectUtils {
             return null;
         }
     }
+
+    public static <T> T coalesce(T... objs) {
+        for (T obj: objs) {
+            if (obj != null) {
+                return obj;
+            }
+        }
+        return null;
+    }
 }

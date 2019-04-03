@@ -46,12 +46,12 @@ public class FunctionHelper {
 
     /**
      * 执行函数表达式
-     * @param funcExpression
+     * @param funcExpression 格式为 @func(p1 [, p2, ...])
      * @return
      */
     public static Object execFunction(String funcExpression) {
         int bracketIndex = funcExpression.indexOf('(');
-        String funcName = funcExpression.substring(0, bracketIndex);
+        String funcName = funcExpression.substring(1, bracketIndex);
         Object[] params = resolveParams(funcExpression.substring(bracketIndex+1, funcExpression.length()-1));
 
         List<MockFunction> functions = MOCK_FUNCTIONS.get(funcName);

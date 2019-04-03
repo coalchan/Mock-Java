@@ -39,9 +39,9 @@ public class Rule {
 
     private Integer step;
 
-
     private static final Pattern RE_KEY = Pattern.compile("(.+)\\|(?:\\+(\\d+)|([\\+-]?\\d+-?[\\+-]?\\d*)?(\\.\\d+-?\\d*)?)");
     private static final Pattern RE_RANGE = Pattern.compile("([\\+-]?\\d+)-?([\\+-]?\\d+)?");
+    private static final Pattern RE_PLACEHOLDER = Pattern.compile("@([^@#%&()\\?\\s]+)(\\((.*)\\))");
 
     /**
      * 解析模板
@@ -81,5 +81,15 @@ public class Rule {
         }
 
         return rule;
+    }
+
+    /**
+     * 是否为占位符
+     * @param value
+     * @return
+     */
+    public static boolean isPlaceholder(String value) {
+        Matcher matcher = RE_PLACEHOLDER.matcher(value);
+        return matcher.matches();
     }
 }

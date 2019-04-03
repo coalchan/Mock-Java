@@ -14,6 +14,11 @@ import java.math.BigDecimal;
 public class BasicFunction {
     private BasicFunction() {}
 
+    public static final long DEFAULT_FLOAT_MIN = Long.MIN_VALUE;
+    public static final long DEFAULT_FLOAT_MAX = Long.MAX_VALUE;
+    public static final int DEFAULT_FLOAT_D_MIN = 0;
+    public static final int DEFAULT_FLOAT_D_MAX = 16;
+
     @FunctionInfo(alias = {"boolean"}, desc = "返回一个随机的布尔值")
     public static boolean bool() {
         return RandomUtils.nextBoolean();
@@ -46,22 +51,22 @@ public class BasicFunction {
 
     @FunctionInfo(alias = {"float"}, desc = "返回一个随机的浮点数")
     public static double _float() {
-        return _float(Long.MIN_VALUE);
+        return _float(DEFAULT_FLOAT_MIN);
     }
 
     @FunctionInfo(alias = {"float"}, desc = "给定整数部分的最小值min，返回一个随机的浮点数")
     public static double _float(long min) {
-        return _float(min, Long.MAX_VALUE);
+        return _float(min, DEFAULT_FLOAT_MAX);
     }
 
     @FunctionInfo(alias = {"float"}, desc = "给定整数部分的最小值min，整数部分的最大值max，返回一个随机的浮点数")
     public static double _float(long min, long max) {
-        return _float(min, max, 0);
+        return _float(min, max, DEFAULT_FLOAT_D_MIN);
     }
 
     @FunctionInfo(alias = {"float"}, desc = "给定整数部分的最小值min，整数部分的最大值max，小数部分位数的最小值dmin，返回一个随机的浮点数")
     public static double _float(long min, long max, int dMin) {
-        return _float(min, max, dMin, 16);
+        return _float(min, max, dMin, DEFAULT_FLOAT_D_MAX);
     }
 
     @FunctionInfo(alias = {"float"}, desc = "给定整数部分的最小值min，整数部分的最大值max，小数部分位数的最小值dmin，小数部分位数的最大值dmax，返回一个随机的浮点数")
