@@ -1,4 +1,4 @@
-package com.luckypeng.mock.core.schema;
+package com.luckypeng.mock.core.function.schema;
 
 /**
  * @author coalchan

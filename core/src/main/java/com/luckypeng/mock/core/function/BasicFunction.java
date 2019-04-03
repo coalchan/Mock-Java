@@ -1,7 +1,7 @@
 package com.luckypeng.mock.core.function;
 
-import com.luckypeng.mock.core.schema.Function;
-import com.luckypeng.mock.core.schema.FunctionInfo;
+import com.luckypeng.mock.core.function.schema.Function;
+import com.luckypeng.mock.core.function.schema.FunctionInfo;
 import org.apache.commons.lang3.RandomUtils;
 
 import java.math.BigDecimal;
