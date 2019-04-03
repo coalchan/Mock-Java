@@ -188,7 +188,7 @@ public class ClassScanner {
      * @return
      */
     public static String packageToPath(String packageName) {
-        return packageName.replaceAll("\\.", File.separator);
+        return packageName.replace(".", File.separator);
     }
 
     /**
