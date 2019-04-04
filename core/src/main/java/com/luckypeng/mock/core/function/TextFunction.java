@@ -1,5 +1,7 @@
 package com.luckypeng.mock.core.function;
 
+import com.luckypeng.mock.core.function.BasicFunction.CharacterEnum;
+
 import com.luckypeng.mock.core.function.schema.Function;
 import com.luckypeng.mock.core.function.schema.FunctionInfo;
 import org.apache.commons.lang3.StringUtils;
