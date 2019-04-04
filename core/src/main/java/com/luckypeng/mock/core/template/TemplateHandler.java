@@ -259,32 +259,4 @@ public class TemplateHandler {
                 .forEach(json -> result.add(handle(json)));
         return result;
     }
-
-    public static void main(String[] args) {
-        String json = "{\n" +
-                "  \"string|1-10\": \"★\",\n" +
-                "  \"number|1-100\": 1,\n" +
-                "  \"boolean|1-2\": true,\n" +
-                "  \"regexp\": \"/[a-z][A-Z][0-9]/\",\n" +
-                "  \"function\": 0.8824693807299919,\n" +
-                "  \"array|1-10\": [\n" +
-                "    {\n" +
-                "      \"foo|+1\": 18,\n" +
-                "      \"bar|1-10\": \"★\"\n" +
-                "    }\n" +
-                "  ],\n" +
-                "  \"items\": [\n" +
-                "    1,\n" +
-                "    true,\n" +
-                "    \"hello\",\n" +
-                "    \"/\\\\w{10}/\"\n" +
-                "  ],\n" +
-                "  \"object|3-5\": {\n" +
-                "    \"foo|+1\": 1,\n" +
-                "    \"bar|1-10\": \"★\"\n" +
-                "  },\n" +
-                "  \"placeholder\": \"@title\"\n" +
-                "}";
-        handleTemplate(json);
-    }
 }
