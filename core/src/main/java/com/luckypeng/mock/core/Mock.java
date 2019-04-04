@@ -15,7 +15,7 @@ public class Mock {
      * @param value
      * @return
      */
-    public static Object mock(Object value) {
+    public static Object mockValue(Object value) {
         return TemplateHandler.handle(value);
     }
 
