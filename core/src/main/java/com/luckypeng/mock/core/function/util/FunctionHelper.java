@@ -6,6 +6,7 @@ import com.luckypeng.mock.core.function.schema.FunctionInfo;
 import com.luckypeng.mock.core.function.schema.MockFunction;
 import com.luckypeng.mock.core.function.schema.ParamType;
 import com.luckypeng.mock.core.util.AssertionUtils;
+import com.luckypeng.mock.core.util.ObjectUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -60,8 +61,9 @@ public class FunctionHelper {
             boolean isFit = true;
             Class[] classes = function.getMethod().getParameterTypes();
             // 参数个数检查
-            if (params.length == classes.length) {
-                for (int i = 0; i < params.length; i++) {
+            if ((ObjectUtils.isEmpty(params) && ObjectUtils.isEmpty(classes)) ||
+                    (params != null && params.length == classes.length)) {
+                for (int i = 0; params != null && i < params.length; i++) {
                     // 参数类型检查
                     if(!ParamType.isFitType(params[i], classes[i])) {
                         isFit = false;
