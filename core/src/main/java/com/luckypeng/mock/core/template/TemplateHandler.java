@@ -1,6 +1,7 @@
 package com.luckypeng.mock.core.template;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.luckypeng.mock.core.function.BasicFunction;
@@ -13,6 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import static com.luckypeng.mock.core.function.BasicFunction.*;
+import static com.luckypeng.mock.core.util.ObjectUtils.Operation.*;
 
 /**
  * @author coalchan
@@ -20,27 +22,18 @@ import static com.luckypeng.mock.core.function.BasicFunction.*;
  */
 public class TemplateHandler {
     /**
-     * 模板计算
+     * JSON模板计算
      * @param jsonTemplate
      * @return
      */
-    public static JSONObject handle(String jsonTemplate) {
+    public static JSONObject handleTemplate(String jsonTemplate) {
         LinkedHashMap<String, Object> map = JSON.parseObject(jsonTemplate, new TypeReference<LinkedHashMap<String, Object>>(){});
         JSONObject jsonObject = new JSONObject(map);
         return handle(jsonObject);
     }
 
     /**
-     * 模板计算
-     * @param template
-     * @return
-     */
-    public static JSONObject handle(JSONObject template) {
-        return handle(Rule.fromTemplate("json"), template);
-    }
-
-    /**
-     * 单一模板计算
+     * KV模板计算
      * @param key
      * @param value
      * @return
@@ -51,7 +44,7 @@ public class TemplateHandler {
     }
 
     /**
-     * 计算单一模板结果
+     * KV模板计算
      * @param rule
      * @param value
      * @return
@@ -65,13 +58,36 @@ public class TemplateHandler {
             return handle(rule, (String) value);
         } else if (value instanceof JSONObject) {
             return handle(rule, (JSONObject) value);
+        } else if (value instanceof JSONArray) {
+            return handle(rule, (JSONArray) value);
         } else {
             throw new RuntimeException("暂时不支持该类型数据");
         }
     }
 
     /**
-     * 属性值为布尔值
+     * 处理属性值
+     * @param value
+     * @return
+     */
+    public static Object handle(Object value) {
+        if (value instanceof Boolean) {
+            return handle((boolean) value);
+        } else if (value instanceof Number) {
+            return handle((Number) value);
+        } else if (value instanceof String) {
+            return handle((String) value);
+        } else if (value instanceof JSONObject) {
+            return handle((JSONObject) value);
+        } else if (value instanceof JSONArray) {
+            return handle((JSONArray) value);
+        } else {
+            throw new RuntimeException("暂时不支持该类型数据");
+        }
+    }
+
+    /**
+     * 属性值为布尔值，带有模板规则
      * @param rule
      * @param value
      * @return
@@ -83,11 +99,20 @@ public class TemplateHandler {
                         ObjectUtils.coalesce(rule.getMax(), 1L),
                         value
                 )
-                : value;
+                : handle(value);
     }
 
     /**
-     * 属性值为数字
+     * 属性值为布尔值
+     * @param value
+     * @return
+     */
+    public static boolean handle(boolean value) {
+        return value;
+    }
+
+    /**
+     * 属性值为数字，带有模板规则
      * @param rule
      * @param value
      * @return
@@ -101,22 +126,28 @@ public class TemplateHandler {
                     ObjectUtils.coalesce(rule.getDMax(), DEFAULT_FLOAT_D_MAX)
             );
         } else {
-            return rule.isRange() ? rule.getCount() : value;
+            return rule.isRange() ? rule.getCount() : handle(value);
         }
     }
 
     /**
-     * 属性值为字符串（可能为占位符）
+     * 属性值为数字
+     * @param value
+     * @return
+     */
+    public static Number handle(Number value) {
+        return value;
+    }
+
+    /**
+     * 属性值为字符串（可能为占位符），带有模板规则
      * @param rule
      * @param value
      * @return
      */
     public static String handle(Rule rule, String value) {
         String result = "";
-
-        if (Rule.isPlaceholder(value)) {
-            value = FunctionHelper.execFunction(value).toString();
-        }
+        value = handle(value);
 
         if (!rule.isRange()) {
             result = value;
@@ -130,31 +161,130 @@ public class TemplateHandler {
     }
 
     /**
-     * 属性值为JSON对象
+     * 属性值为字符串（可能为占位符）
+     * @param value
+     * @return
+     */
+    public static String handle(String value) {
+        if (Rule.isPlaceholder(value)) {
+            value = FunctionHelper.execFunction(value).toString();
+        }
+        return value;
+    }
+
+    /**
+     * 属性值为JSON对象，带有模板规则
      * @param rule
      * @param value
      * @return
      */
     public static JSONObject handle(Rule rule, JSONObject value) {
-        JSONObject result;
+        if (value.isEmpty()) {
+            return value;
+        }
         if (rule.isRange()) {
             int size = Math.min(rule.getCount().intValue(), value.size());
-            result = new JSONObject(size, true);
-            List<String> shuffleKeys = new ArrayList<>(value.keySet());
-            Collections.shuffle(shuffleKeys);
+            List<String> randomKeys = new ArrayList<>(value.keySet());
+            Collections.shuffle(randomKeys);
+
+            JSONObject randomValue = new JSONObject(size, true);
             for (int i = 0; i < size; i++) {
-                String subKey = shuffleKeys.get(i);
-                Rule subRule = Rule.fromTemplate(subKey);
-                result.put(subRule.getKey(), handle(subRule, value.get(subKey)));
+                String subKey = randomKeys.get(i);
+                randomValue.put(subKey, value.get(subKey));
             }
+            return handle(randomValue);
         } else {
-            result = new JSONObject(value.size(), true);
-            value.entrySet().stream()
-                    .forEach(kv -> {
-                        Rule subRule = Rule.fromTemplate(kv.getKey());
-                        result.put(subRule.getKey(), handle(subRule, kv.getValue()));
-                    });
+            return handle(value);
         }
+    }
+
+    /**
+     * 属性值为JSON对象
+     * @param value
+     * @return
+     */
+    public static JSONObject handle(JSONObject value) {
+        if (value.isEmpty()) {
+            return value;
+        }
+        JSONObject result = new JSONObject(value.size(), true);
+        value.entrySet().stream()
+                .forEach(kv -> {
+                    Rule subRule = Rule.fromTemplate(kv.getKey());
+                    result.put(subRule.getKey(), handle(subRule, kv.getValue()));
+                    if (subRule.getStep() != null && value.get(kv.getKey()) instanceof Number) {
+                        // 有步长时增加 value，以便下一次递增
+                        value.put(kv.getKey(), ObjectUtils.compute((Number) value.get(kv.getKey()), subRule.getStep(), add));
+                    }
+                });
         return result;
+    }
+
+    /**
+     * 属性值为JSON数组，带有模板规则
+     * @param rule
+     * @param value
+     * @return
+     */
+    public static Object handle(Rule rule, JSONArray value) {
+        if (value.isEmpty()) {
+            return value;
+        }
+        if (Long.valueOf(1).equals(rule.getMin()) && rule.getMax() == null) {
+            // 随机选取 1 个元素
+            return handle(value.get((int) BasicFunction.integer(0, value.size() - 1)));
+        } else if (Integer.valueOf(1).equals(rule.getStep())) {
+            // 顺序选取 1 个元素
+            return handle(value.get(0));
+        } else if (rule.isRange()) {
+            // 生成一个新数组，重复次数为 count，大于等于 min，小于等于 max
+            JSONArray result = new JSONArray();
+            for (int i = 0; i < rule.getCount(); i++) {
+                result.addAll(handle(value));
+            }
+            return result;
+        } else {
+            return value;
+        }
+    }
+
+    /**
+     * 属性值为JSON数组
+     * @param value
+     * @return
+     */
+    public static JSONArray handle(JSONArray value) {
+        JSONArray result = new JSONArray();
+        value.stream()
+                .forEach(json -> result.add(handle(json)));
+        return result;
+    }
+
+    public static void main(String[] args) {
+        String json = "{\n" +
+                "  \"string|1-10\": \"★\",\n" +
+                "  \"number|1-100\": 1,\n" +
+                "  \"boolean|1-2\": true,\n" +
+                "  \"regexp\": \"/[a-z][A-Z][0-9]/\",\n" +
+                "  \"function\": 0.8824693807299919,\n" +
+                "  \"array|1-10\": [\n" +
+                "    {\n" +
+                "      \"foo|+1\": 18,\n" +
+                "      \"bar|1-10\": \"★\"\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"items\": [\n" +
+                "    1,\n" +
+                "    true,\n" +
+                "    \"hello\",\n" +
+                "    \"/\\\\w{10}/\"\n" +
+                "  ],\n" +
+                "  \"object|3-5\": {\n" +
+                "    \"foo|+1\": 1,\n" +
+                "    \"bar|1-10\": \"★\"\n" +
+                "  },\n" +
+                "  \"placeholder\": \"@title\"\n" +
+                "}";
+        handleTemplate(json);
     }
 }
