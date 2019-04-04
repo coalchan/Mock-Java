@@ -39,7 +39,7 @@ public class Rule {
 
     private Integer step;
 
-    private static final Pattern RE_KEY = Pattern.compile("(.+)\\|(?:\\+(\\d+)|([\\+-]?\\d+-?[\\+-]?\\d*)?(\\.\\d+-?\\d*)?)");
+    private static final Pattern RE_KEY = Pattern.compile("([^\\|]+)\\|?(?:\\+(\\d+)|([\\+-]?\\d+-?[\\+-]?\\d*)?(\\.\\d+-?\\d*)?)");
     private static final Pattern RE_RANGE = Pattern.compile("([\\+-]?\\d+)-?([\\+-]?\\d+)?");
     private static final Pattern RE_PLACEHOLDER = Pattern.compile("@([^@#%&()\\?\\s]+)(\\((.*)\\))");
 

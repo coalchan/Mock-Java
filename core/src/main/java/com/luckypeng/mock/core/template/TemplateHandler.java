@@ -1,26 +1,70 @@
 package com.luckypeng.mock.core.template;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.luckypeng.mock.core.function.BasicFunction;
 import com.luckypeng.mock.core.function.util.FunctionHelper;
 import com.luckypeng.mock.core.util.ObjectUtils;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+
 import static com.luckypeng.mock.core.function.BasicFunction.*;
 
+/**
+ * @author coalchan
+ * @date 2019/4/3
+ */
 public class TemplateHandler {
     /**
-     * 计算模板结果
+     * 模板计算
+     * @param jsonTemplate
+     * @return
+     */
+    public static JSONObject handle(String jsonTemplate) {
+        LinkedHashMap<String, Object> map = JSON.parseObject(jsonTemplate, new TypeReference<LinkedHashMap<String, Object>>(){});
+        JSONObject jsonObject = new JSONObject(map);
+        return handle(jsonObject);
+    }
+
+    /**
+     * 模板计算
      * @param template
+     * @return
+     */
+    public static JSONObject handle(JSONObject template) {
+        return handle(Rule.fromTemplate("json"), template);
+    }
+
+    /**
+     * 单一模板计算
+     * @param key
      * @param value
      * @return
      */
-    public static Object handle(String template, Object value) {
-        Rule rule = Rule.fromTemplate(template);
+    public static Object handle(String key, Object value) {
+        Rule rule = Rule.fromTemplate(key);
+        return handle(rule, value);
+    }
+
+    /**
+     * 计算单一模板结果
+     * @param rule
+     * @param value
+     * @return
+     */
+    public static Object handle(Rule rule, Object value) {
         if (value instanceof Boolean) {
             return handle(rule, (boolean) value);
         } else if (value instanceof Number) {
             return handle(rule, (Number) value);
         } else if (value instanceof String) {
             return handle(rule, (String) value);
+        } else if (value instanceof JSONObject) {
+            return handle(rule, (JSONObject) value);
         } else {
             throw new RuntimeException("暂时不支持该类型数据");
         }
@@ -82,6 +126,35 @@ public class TemplateHandler {
             }
         }
 
+        return result;
+    }
+
+    /**
+     * 属性值为JSON对象
+     * @param rule
+     * @param value
+     * @return
+     */
+    public static JSONObject handle(Rule rule, JSONObject value) {
+        JSONObject result;
+        if (rule.isRange()) {
+            int size = Math.min(rule.getCount().intValue(), value.size());
+            result = new JSONObject(size, true);
+            List<String> shuffleKeys = new ArrayList<>(value.keySet());
+            Collections.shuffle(shuffleKeys);
+            for (int i = 0; i < size; i++) {
+                String subKey = shuffleKeys.get(i);
+                Rule subRule = Rule.fromTemplate(subKey);
+                result.put(subRule.getKey(), handle(subRule, value.get(subKey)));
+            }
+        } else {
+            result = new JSONObject(value.size(), true);
+            value.entrySet().stream()
+                    .forEach(kv -> {
+                        Rule subRule = Rule.fromTemplate(kv.getKey());
+                        result.put(subRule.getKey(), handle(subRule, kv.getValue()));
+                    });
+        }
         return result;
     }
 }
