@@ -7,6 +7,7 @@ import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.RandomUtils;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @author coalchan
@@ -163,6 +164,16 @@ public class BasicFunction {
      */
     public static <T> T pick(T[] array) {
         return array[(int) integer(0, array.length - 1)];
+    }
+
+    /**
+     * 从列表中随机选取一个
+     * @param list
+     * @param <T>
+     * @return
+     */
+    public static <T> T pick(List<T> list) {
+        return list.get((int) integer(0, list.size() - 1));
     }
 
     @Getter

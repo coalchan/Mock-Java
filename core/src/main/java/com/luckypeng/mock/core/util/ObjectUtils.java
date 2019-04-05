@@ -1,5 +1,6 @@
 package com.luckypeng.mock.core.util;
 
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Map;
@@ -40,5 +41,23 @@ public class ObjectUtils {
         return null;
     }
 
-
+    /**
+     * 读取文件到字符串
+     * @param fileName
+     * @return
+     */
+    public static String fromFile(String fileName) {
+        InputStream inputStream = ObjectUtils.class.getClassLoader().getResourceAsStream(fileName);
+        StringBuilder sb = new StringBuilder();
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+        String line;
+        try {
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return sb.toString();
+    }
 }
