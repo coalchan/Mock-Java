@@ -1,7 +1,7 @@
 package com.luckypeng.mock.core.function;
 
+import com.luckypeng.mock.core.function.schema.Functions;
 import com.luckypeng.mock.core.function.schema.Function;
-import com.luckypeng.mock.core.function.schema.FunctionInfo;
 import com.luckypeng.mock.core.util.DateUtils;
 import org.joda.time.DateTime;
 
@@ -13,39 +13,39 @@ import java.util.regex.Pattern;
  * @author coalchan
  * @date 2019/4/4
  */
-@Function
+@Functions
 public class DateFunction {
     private DateFunction() {}
 
     private static final Pattern RE_UNIT = Pattern.compile("year|month|day|hour|minute|second|week");
 
-    @FunctionInfo
+    @Function
     public static String datetime() {
         return datetime(DateUtils.DEFAULT_DATETIME_PATTERN);
     }
 
-    @FunctionInfo
+    @Function
     public static String date() {
         return datetime(DateUtils.DEFAULT_DATE_PATTERN);
     }
 
-    @FunctionInfo
+    @Function
     public static String time() {
         return datetime(DateUtils.DEFAULT_TIME_PATTERN);
     }
 
-    @FunctionInfo(alias = {"date", "time"})
+    @Function(alias = {"date", "time"})
     public static String datetime(String format) {
         long ts = BasicFunction.integer(0, System.currentTimeMillis());
         return DateUtils.toDateTimeString(DateUtils.fromTimeStamp(ts), format);
     }
 
-    @FunctionInfo
+    @Function
     public static String now() {
         return now(DateUtils.DEFAULT_DATETIME_PATTERN);
     }
 
-    @FunctionInfo
+    @Function
     public static String now(String unitOrFormat) {
         String unit = "";
         String format = DateUtils.DEFAULT_DATETIME_PATTERN;
@@ -58,7 +58,7 @@ public class DateFunction {
         return now(unit, format);
     }
 
-    @FunctionInfo
+    @Function
     public static String now(String unit, String format) {
         DateTime dateTime = DateTime.now();
 

@@ -1,14 +1,14 @@
 package com.luckypeng.mock.core.function;
 
+import com.luckypeng.mock.core.function.schema.Functions;
 import com.luckypeng.mock.core.function.schema.Function;
-import com.luckypeng.mock.core.function.schema.FunctionInfo;
 import com.luckypeng.mock.core.util.ArrayUtils;
 
 /**
  * @author coalchan
  * @date 2019/4/5
  */
-@Function
+@Functions
 public class NameFunction {
     private NameFunction() {}
 
@@ -69,37 +69,37 @@ public class NameFunction {
             "平", "刚", "桂英"
     };
 
-    @FunctionInfo
+    @Function
     public static String first() {
         return BasicFunction.pick(FIRST_NAMES);
     }
 
-    @FunctionInfo
+    @Function
     public static String last() {
         return BasicFunction.pick(LAST_NAMES);
     }
 
-    @FunctionInfo
+    @Function
     public static String name() {
         return name(false);
     }
 
-    @FunctionInfo
+    @Function
     public static String name(boolean middle) {
         return first() + " " + (middle ? first() + " " : "") + last();
     }
 
-    @FunctionInfo
+    @Function
     public static String cfirst() {
         return BasicFunction.pick(CN_FIRST_NAMES);
     }
 
-    @FunctionInfo
+    @Function
     public static String clast() {
         return BasicFunction.pick(CN_LAST_NAMES);
     }
 
-    @FunctionInfo
+    @Function
     public static String cname() {
         return cfirst() + clast();
     }

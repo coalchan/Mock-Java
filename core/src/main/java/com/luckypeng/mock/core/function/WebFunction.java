@@ -1,15 +1,15 @@
 package com.luckypeng.mock.core.function;
 
 import com.luckypeng.mock.core.function.BasicFunction.CharacterEnum;
+import com.luckypeng.mock.core.function.schema.Functions;
 import com.luckypeng.mock.core.function.schema.Function;
-import com.luckypeng.mock.core.function.schema.FunctionInfo;
 import com.luckypeng.mock.core.util.ArrayUtils;
 
 /**
  * @author coalchan
  * @date 2019/4/5
  */
-@Function
+@Functions
 public class WebFunction {
     private WebFunction() {}
 
@@ -88,7 +88,7 @@ public class WebFunction {
             NEW_INTERNATIONAL_DOMAIN_SUFFIX, OTHER_DOMAIN_SUFFIX
     );
 
-    @FunctionInfo
+    @Function
     public static final String ip() {
         return BasicFunction.integer(0, 255) + "." +
                 BasicFunction.integer(0, 255) + "." +
@@ -96,47 +96,47 @@ public class WebFunction {
                 BasicFunction.integer(0, 255);
     }
 
-    @FunctionInfo
+    @Function
     public static final String email() {
         return email(domain());
     }
 
-    @FunctionInfo
+    @Function
     public static final String email(String domain) {
         return BasicFunction.character(CharacterEnum.lower) + "." + TextFunction.word() + "@" + domain;
     }
 
-    @FunctionInfo
+    @Function
     public static final String url() {
         return url(protocol());
     }
 
-    @FunctionInfo
+    @Function
     public static final String url(String protocol) {
         return url(protocol, domain());
     }
 
-    @FunctionInfo
+    @Function
     public static final String url(String protocol, String host) {
         return protocol + "://" + host + "/" + TextFunction.word();
     }
 
-    @FunctionInfo
+    @Function
     public static final String protocol() {
         return BasicFunction.pick(PROTOCOLS);
     }
 
-    @FunctionInfo
+    @Function
     public static final String domain() {
         return domain(tld());
     }
 
-    @FunctionInfo
+    @Function
     public static final String domain(String tld) {
         return TextFunction.word() + "." + tld;
     }
 
-    @FunctionInfo
+    @Function
     public static final String tld() {
         return BasicFunction.pick(DOMAIN_SUFFIX);
     }

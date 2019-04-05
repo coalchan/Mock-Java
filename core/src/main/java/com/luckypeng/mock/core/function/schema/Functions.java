@@ -9,16 +9,7 @@ import java.lang.annotation.Target;
  * @author coalchan
  * @date 2019/4/2
  */
-@Target(ElementType.METHOD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FunctionInfo {
-    /**
-     * 函数别名列表
-     */
-    String[] alias() default {};
-
-    /**
-     * 函数描述
-     */
-    String desc() default "";
+public @interface Functions {
 }

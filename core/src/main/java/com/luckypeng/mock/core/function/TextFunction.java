@@ -2,15 +2,15 @@ package com.luckypeng.mock.core.function;
 
 import com.luckypeng.mock.core.function.BasicFunction.CharacterEnum;
 
+import com.luckypeng.mock.core.function.schema.Functions;
 import com.luckypeng.mock.core.function.schema.Function;
-import com.luckypeng.mock.core.function.schema.FunctionInfo;
 import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author coalchan
  * @date 2019/4/4
  */
-@Function
+@Functions
 public class TextFunction {
     private TextFunction() {}
 
@@ -35,17 +35,17 @@ public class TextFunction {
                     "深难近矿千周委素技备半办青省列习响约支般史感劳便团往酸历市克何除消构府称太准精值号率族维划选标写存候毛亲" +
                     "快效斯院查江型眼王按格养易置派层片始却专状育厂京识适属圆包火住调满县局照参红细引听该铁价严龙飞");
 
-    @FunctionInfo
+    @Function
     public static String cparagraph() {
         return cparagraph(DEFAULT_PARAGRAPH_MIN, DEFAULT_PARAGRAPH_MAX);
     }
 
-    @FunctionInfo
+    @Function
     public static String cparagraph(int min, int max) {
         return cparagraph((int) BasicFunction.integer(min, max));
     }
 
-    @FunctionInfo
+    @Function
     public static String cparagraph(int length) {
         String[] sentences = new String[length];
         for (int i = 0; i < length; i++) {
@@ -54,17 +54,17 @@ public class TextFunction {
         return String.join("", sentences);
     }
 
-    @FunctionInfo
+    @Function
     public static String csentence() {
         return csentence(DEFAULT_SENTENCE_MIN, DEFAULT_SENTENCE_MAX);
     }
 
-    @FunctionInfo
+    @Function
     public static String csentence(int min, int max) {
         return csentence((int) BasicFunction.integer(min, max));
     }
 
-    @FunctionInfo
+    @Function
     public static String csentence(int length) {
         String[] words = new String[length];
         for (int i = 0; i < length; i++) {
@@ -73,17 +73,17 @@ public class TextFunction {
         return String.join("", words) + "。";
     }
 
-    @FunctionInfo
+    @Function
     public static String ctitle() {
         return ctitle((int) BasicFunction.integer(DEFAULT_TITLE_MIN, DEFAULT_TITLE_MAX));
     }
 
-    @FunctionInfo
+    @Function
     public static String ctitle(int min, int max) {
         return ctitle((int) BasicFunction.integer(min, max));
     }
 
-    @FunctionInfo
+    @Function
     public static String ctitle(int length) {
         String[] words = new String[length];
         for (int i = 0; i < length; i++) {
@@ -92,32 +92,32 @@ public class TextFunction {
         return String.join("", words);
     }
 
-    @FunctionInfo
+    @Function
     public static String cword() {
         return cword(DICT_COMMON_CN);
     }
 
-    @FunctionInfo
+    @Function
     public static String cword(String pool) {
         return cword(pool, 1);
     }
 
-    @FunctionInfo
+    @Function
     public static String cword(int length) {
         return cword(DICT_COMMON_CN, length);
     }
 
-    @FunctionInfo
+    @Function
     public static String cword(int min, int max) {
         return cword(DICT_COMMON_CN, min, max);
     }
 
-    @FunctionInfo
+    @Function
     public static String cword(String pool, int min, int max) {
         return cword(pool, BasicFunction.integer(min, max));
     }
 
-    @FunctionInfo
+    @Function
     public static String cword(String pool, long length) {
         String result = "";
         for (int i = 0; i < length; i++) {
@@ -126,17 +126,17 @@ public class TextFunction {
         return result;
     }
 
-    @FunctionInfo
+    @Function
     public static String paragraph() {
         return paragraph(DEFAULT_PARAGRAPH_MIN, DEFAULT_PARAGRAPH_MAX);
     }
 
-    @FunctionInfo
+    @Function
     public static String paragraph(int min, int max) {
         return paragraph((int) BasicFunction.integer(min, max));
     }
 
-    @FunctionInfo
+    @Function
     public static String paragraph(int length) {
         String[] sentences = new String[length];
         for (int i = 0; i < length; i++) {
@@ -145,17 +145,17 @@ public class TextFunction {
         return String.join(" ", sentences);
     }
 
-    @FunctionInfo
+    @Function
     public static String sentence() {
         return sentence(DEFAULT_SENTENCE_MIN, DEFAULT_SENTENCE_MAX);
     }
 
-    @FunctionInfo
+    @Function
     public static String sentence(int min, int max) {
         return sentence((int) BasicFunction.integer(min, max));
     }
 
-    @FunctionInfo
+    @Function
     public static String sentence(int length) {
         String[] words = new String[length];
         for (int i = 0; i < length; i++) {
@@ -164,17 +164,17 @@ public class TextFunction {
         return StringUtils.capitalize(String.join(" ", words)) + ".";
     }
 
-    @FunctionInfo
+    @Function
     public static String title() {
         return title((int) BasicFunction.integer(DEFAULT_TITLE_MIN, DEFAULT_TITLE_MAX));
     }
 
-    @FunctionInfo
+    @Function
     public static String title(int min, int max) {
         return title((int) BasicFunction.integer(min, max));
     }
 
-    @FunctionInfo
+    @Function
     public static String title(int length) {
         String[] words = new String[length];
         for (int i = 0; i < length; i++) {
@@ -183,17 +183,17 @@ public class TextFunction {
         return String.join(" ", words);
     }
 
-    @FunctionInfo
+    @Function
     public static String word() {
         return BasicFunction.string(CharacterEnum.lower, DEFAULT_WORD_MIN, DEFAULT_WORD_MAX);
     }
 
-    @FunctionInfo
+    @Function
     public static String word(int length) {
         return BasicFunction.string(CharacterEnum.lower, length);
     }
 
-    @FunctionInfo
+    @Function
     public static String word(int min, int max) {
         return BasicFunction.string(CharacterEnum.lower, min, max);
     }
