@@ -90,7 +90,7 @@ public class BasicFunction {
     @Function(alias = {"char"}, desc = "给定一个字符池，从中返回一个随机字符")
     public static Character character(String pool) {
         pool = CharacterEnum.searchPool(pool);
-        return pool.charAt(RandomUtils.nextInt(0, pool.length() - 1));
+        return pool.charAt((int) integer(0, pool.length() - 1));
     }
 
     @Function(alias = {"str"}, desc = "从已有的字符池中，从中选择指定长度在3和7之间的随机字符串")

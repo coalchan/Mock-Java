@@ -15,6 +15,8 @@ import java.util.List;
  */
 @Functions
 public class AddressFunction {
+    private AddressFunction() {}
+
     public static String[] REGION = {
             "东北", "华北", "华东", "华中", "华南", "西南", "西北"
     };

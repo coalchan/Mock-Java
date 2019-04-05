@@ -14,6 +14,11 @@ public class DateUtils {
     private DateUtils() {}
 
     /**
+     * 日期格式：yyyyMMdd
+     */
+    public static final String DEFAULT_DATE_YYYYMMdd = "yyyyMMdd";
+
+    /**
      * 默认日期格式：yyyy-MM-dd
      */
     public static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd";
