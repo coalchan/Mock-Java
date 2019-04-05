@@ -16,7 +16,7 @@ public class WebFunction {
     /**
      * 协议簇
      */
-    private static final String[] PROTOCOLS = new String[] {
+    private static final String[] PROTOCOLS = {
             "http", "ftp", "gopher", "mailto", "mid",
             "cid", "news", "nntp", "prospero", "telnet",
             "rlogin", "tn3270", "wais"
@@ -25,28 +25,28 @@ public class WebFunction {
     /**
      * 常见域名后缀
      */
-    private static final String[] COMMON_DOMAIN_SUFFIX = new String[] {
+    private static final String[] COMMON_DOMAIN_SUFFIX = {
             "com", "net", "org", "edu", "gov", "int", "mil", "cn"
     };
 
     /**
      * 国内域名
      */
-    private static final String[] INTERNAL_DOMAIN_SUFFIX = new String[] {
+    private static final String[] INTERNAL_DOMAIN_SUFFIX = {
             "com.cn", "net.cn", "gov.cn", "org.cn"
     };
 
     /**
      * 中文国内域名
      */
-    private static final String[] INTERNAL_CN_DOMAIN_SUFFIX = new String[] {
+    private static final String[] INTERNAL_CN_DOMAIN_SUFFIX = {
             "中国", "中国互联.公司", "中国互联.网络"
     };
 
     /**
      * 新国际域名
      */
-    private static final String[] NEW_INTERNATIONAL_DOMAIN_SUFFIX = new String[] {
+    private static final String[] NEW_INTERNATIONAL_DOMAIN_SUFFIX = {
             "tel", "biz", "cc", "tv", "info", "name", "hk", "mobi",
             "asia", "cd", "travel", "pro", "museum", "coop", "aero"
     };
@@ -54,7 +54,7 @@ public class WebFunction {
     /**
      * 世界各国域名后缀
      */
-    private static final String[] OTHER_DOMAIN_SUFFIX = new String[] {
+    private static final String[] OTHER_DOMAIN_SUFFIX = {
             "ad", "ae", "af", "ag", "ai", "al", "am", "an", "ao",
             "aq", "ar", "as", "at", "au", "aw", "az", "ba", "bb",
             "bd", "be", "bf", "bg", "bh", "bi", "bj", "bm", "bn",

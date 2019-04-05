@@ -15,7 +15,7 @@ public class NameFunction {
     /**
      * male name
      */
-    private static final String[] FIRST_NAME_MALE = new String[] {
+    private static final String[] FIRST_NAME_MALE = {
             "James", "John", "Robert", "Michael", "William",
             "David", "Richard", "Charles", "Joseph", "Thomas",
             "Christopher", "Daniel", "Paul", "Mark", "Donald",
@@ -28,7 +28,7 @@ public class NameFunction {
     /**
      * female name
      */
-    private static final String[] FIRST_NAME_FEMALE = new String[] {
+    private static final String[] FIRST_NAME_FEMALE = {
             "Mary", "Patricia", "Linda", "Barbara", "Elizabeth",
             "Jennifer", "Maria", "Susan", "Margaret", "Dorothy",
             "Lisa", "Nancy", "Karen", "Betty", "Helen",
@@ -40,7 +40,7 @@ public class NameFunction {
 
     private static final String[] FIRST_NAMES = ArrayUtils.addAll(FIRST_NAME_MALE, FIRST_NAME_FEMALE);
 
-    private static final String[] LAST_NAMES = new String[] {
+    private static final String[] LAST_NAMES = {
             "Smith", "Johnson", "Williams", "Brown", "Jones",
             "Miller", "Davis", "Garcia", "Rodriguez", "Wilson",
             "Martinez", "Anderson", "Taylor", "Thomas", "Hernandez",
@@ -50,7 +50,7 @@ public class NameFunction {
             "Young", "Allen"
     };
 
-    private static final String[] CN_FIRST_NAMES = new String[] {
+    private static final String[] CN_FIRST_NAMES = {
             "王", "李", "张", "刘", "陈", "杨", "赵", "黄", "周", "吴",
             "徐", "孙", "胡", "朱", "高", "林", "何", "郭", "马", "罗",
             "梁", "宋", "郑", "谢", "韩", "唐", "冯", "于", "董", "萧",
@@ -63,7 +63,7 @@ public class NameFunction {
             "尹", "黎", "易", "常", "武", "乔", "贺", "赖", "龚", "文"
     };
 
-    private static final String[] CN_LAST_NAMES = new String[] {
+    private static final String[] CN_LAST_NAMES = {
             "伟", "芳", "娜", "秀英", "敏", "静", "丽", "强", "磊", "军",
             "洋", "勇", "艳", "杰", "娟", "涛", "明", "超", "秀兰", "霞",
             "平", "刚", "桂英"
