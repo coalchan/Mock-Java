@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.luckypeng.mock.core.function.BasicFunction;
 import com.luckypeng.mock.core.function.util.FunctionHelper;
+import com.luckypeng.mock.core.util.NumberUtils;
 import com.luckypeng.mock.core.util.ObjectUtils;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import static com.luckypeng.mock.core.function.BasicFunction.*;
-import static com.luckypeng.mock.core.util.ObjectUtils.Operation.*;
+import static com.luckypeng.mock.core.util.NumberUtils.Operation.*;
 
 /**
  * @author coalchan
@@ -214,7 +215,7 @@ public class TemplateHandler {
                     result.put(subRule.getKey(), handle(subRule, kv.getValue()));
                     if (subRule.getStep() != null && value.get(kv.getKey()) instanceof Number) {
                         // 有步长时增加 value，以便下一次递增
-                        value.put(kv.getKey(), ObjectUtils.compute((Number) value.get(kv.getKey()), subRule.getStep(), add));
+                        value.put(kv.getKey(), NumberUtils.compute((Number) value.get(kv.getKey()), subRule.getStep(), add));
                     }
                 });
         return result;

@@ -2,7 +2,7 @@ package com.luckypeng.mock.core.function;
 
 import com.luckypeng.mock.core.function.schema.Function;
 import com.luckypeng.mock.core.function.schema.FunctionInfo;
-import org.apache.commons.lang3.ArrayUtils;
+import com.luckypeng.mock.core.util.ArrayUtils;
 
 /**
  * @author coalchan
@@ -10,6 +10,8 @@ import org.apache.commons.lang3.ArrayUtils;
  */
 @Function
 public class NameFunction {
+    private NameFunction() {}
+
     /**
      * male name
      */
@@ -69,12 +71,12 @@ public class NameFunction {
 
     @FunctionInfo
     public static String first() {
-        return FIRST_NAMES[(int) BasicFunction.integer(0, FIRST_NAMES.length - 1)];
+        return BasicFunction.pick(FIRST_NAMES);
     }
 
     @FunctionInfo
     public static String last() {
-        return LAST_NAMES[(int) BasicFunction.integer(0, LAST_NAMES.length - 1)];
+        return BasicFunction.pick(LAST_NAMES);
     }
 
     @FunctionInfo
@@ -89,12 +91,12 @@ public class NameFunction {
 
     @FunctionInfo
     public static String cfirst() {
-        return CN_FIRST_NAMES[(int) BasicFunction.integer(0, CN_FIRST_NAMES.length - 1)];
+        return BasicFunction.pick(CN_FIRST_NAMES);
     }
 
     @FunctionInfo
     public static String clast() {
-        return CN_LAST_NAMES[(int) BasicFunction.integer(0, CN_LAST_NAMES.length - 1)];
+        return BasicFunction.pick(CN_LAST_NAMES);
     }
 
     @FunctionInfo

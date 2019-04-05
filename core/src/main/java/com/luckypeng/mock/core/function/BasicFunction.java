@@ -155,6 +155,16 @@ public class BasicFunction {
         return result;
     }
 
+    /**
+     * 从数组中随机选取一个
+     * @param array
+     * @param <T>
+     * @return
+     */
+    public static <T> T pick(T[] array) {
+        return array[(int) integer(0, array.length - 1)];
+    }
+
     @Getter
     public enum CharacterEnum {
         lower("abcdefghijklmnopqrstuvwxyz"),

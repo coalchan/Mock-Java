@@ -1,7 +1,7 @@
 package com.luckypeng.mock.core.template;
 
 import com.luckypeng.mock.core.function.BasicFunction;
-import com.luckypeng.mock.core.util.ObjectUtils;
+import com.luckypeng.mock.core.util.NumberUtils;
 import lombok.Data;
 
 import java.util.regex.Matcher;
@@ -55,14 +55,14 @@ public class Rule {
         if (matcher.find()) {
             rule.setKey(matcher.group(1));
 
-            rule.setStep(ObjectUtils.parseInt(matcher.group(2)));
+            rule.setStep(NumberUtils.parseInt(matcher.group(2)));
 
             rule.setRange(matcher.group(3) != null);
             if (rule.isRange()) {
                 Matcher rangeMatcher = RE_RANGE.matcher(matcher.group(3));
                 if (rangeMatcher.find()) {
-                    rule.setMin(ObjectUtils.parseLong(rangeMatcher.group(1)));
-                    rule.setMax(ObjectUtils.parseLong(rangeMatcher.group(2)));
+                    rule.setMin(NumberUtils.parseLong(rangeMatcher.group(1)));
+                    rule.setMax(NumberUtils.parseLong(rangeMatcher.group(2)));
                 }
 
                 rule.setCount(rule.getMax() == null ? rule.getMin() : BasicFunction.integer(rule.getMin(), rule.getMax()));
@@ -72,8 +72,8 @@ public class Rule {
             if (rule.isDecimal()) {
                 Matcher rangeMatcher = RE_RANGE.matcher(matcher.group(4));
                 if (rangeMatcher.find()) {
-                    rule.setDMin(ObjectUtils.parseInt(rangeMatcher.group(1)));
-                    rule.setDMax(ObjectUtils.parseInt(rangeMatcher.group(2)));
+                    rule.setDMin(NumberUtils.parseInt(rangeMatcher.group(1)));
+                    rule.setDMax(NumberUtils.parseInt(rangeMatcher.group(2)));
                 }
 
                 rule.setDCount(rule.getDMax() == null ? rule.getDMin() : (int) BasicFunction.integer(rule.getDMin(), rule.getDMax()));
