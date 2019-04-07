@@ -28,7 +28,8 @@ public class TemplateHandler {
      * @return
      */
     public static JSONObject handleTemplate(String jsonTemplate) {
-        LinkedHashMap<String, Object> map = JSON.parseObject(jsonTemplate, new TypeReference<LinkedHashMap<String, Object>>(){});
+        LinkedHashMap<String, Object> map =
+                JSON.parseObject(jsonTemplate, new TypeReference<LinkedHashMap<String, Object>>(){});
         JSONObject jsonObject = new JSONObject(map);
         return handle(jsonObject);
     }
@@ -120,7 +121,7 @@ public class TemplateHandler {
      */
     public static Number handle(Rule rule, Number value) {
         if (rule.isDecimal()) {
-            return BasicFunction._float(
+            return BasicFunction.decimal(
                     ObjectUtils.coalesce(rule.getMin(), DEFAULT_FLOAT_MIN),
                     ObjectUtils.coalesce(rule.getMax(), DEFAULT_FLOAT_MAX),
                     ObjectUtils.coalesce(rule.getDMin(), DEFAULT_FLOAT_D_MIN),
@@ -215,7 +216,8 @@ public class TemplateHandler {
                     result.put(subRule.getKey(), handle(subRule, kv.getValue()));
                     if (subRule.getStep() != null && value.get(kv.getKey()) instanceof Number) {
                         // 有步长时增加 value，以便下一次递增
-                        value.put(kv.getKey(), NumberUtils.compute((Number) value.get(kv.getKey()), subRule.getStep(), add));
+                        value.put(kv.getKey(),
+                                NumberUtils.compute((Number) value.get(kv.getKey()), subRule.getStep(), add));
                     }
                 });
         return result;

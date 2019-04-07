@@ -3,6 +3,7 @@ package com.luckypeng.mock.core.function;
 import com.luckypeng.mock.core.function.schema.Functions;
 import com.luckypeng.mock.core.function.schema.Function;
 import com.luckypeng.mock.core.util.DateUtils;
+import org.apache.commons.lang3.EnumUtils;
 import org.joda.time.DateTime;
 
 import java.util.Locale;
@@ -61,27 +62,34 @@ public class DateFunction {
     @Function
     public static String now(String unit, String format) {
         DateTime dateTime = DateTime.now();
-
-        switch (unit) {
-            case "year":
+        DateUnit dateUnit = EnumUtils.getEnum(DateUnit.class, unit);
+        switch (dateUnit) {
+            case year:
                 dateTime = dateTime.withMonthOfYear(1);
-            case "month":
+            case month:
                 dateTime = dateTime.withDayOfMonth(1);
-            case "week":
-            case "day":
+            case week:
+            case day:
                 dateTime = dateTime.withHourOfDay(0);
-            case "hour":
+            case hour:
                 dateTime = dateTime.withMinuteOfHour(0);
-            case "minute":
+            case minute:
                 dateTime = dateTime.withSecondOfMinute(0);
-            case "second":
+            case second:
                 dateTime = dateTime.withMillisOfSecond(0);
             default:
                 break;
         }
-        if ("week".equals(unit)) {
+        if (DateUnit.week.equals(dateUnit)) {
             dateTime = dateTime.withDayOfWeek(1);
         }
         return dateTime.toString(format, Locale.CHINESE);
+    }
+
+    private enum DateUnit {
+        /**
+         * 日期类型
+         */
+        year, month, week, day, hour, minute, second
     }
 }

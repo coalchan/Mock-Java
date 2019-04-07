@@ -16,7 +16,7 @@ public class DateUtils {
     /**
      * 日期格式：yyyyMMdd
      */
-    public static final String DEFAULT_DATE_YYYYMMdd = "yyyyMMdd";
+    public static final String DEFAULT_DATE_YYYY_MM_DD = "yyyyMMdd";
 
     /**
      * 默认日期格式：yyyy-MM-dd

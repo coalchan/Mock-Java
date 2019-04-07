@@ -17,7 +17,7 @@ import java.util.UUID;
 public class MiscFunction {
     private MiscFunction() {}
 
-    private static final String[] zips =
+    private static final String[] ZIPS =
             JSON.parseObject(ObjectUtils.fromFile("china-zip.json")).keySet().toArray(new String[]{});
 
     private static long base = 0;
@@ -29,8 +29,8 @@ public class MiscFunction {
 
     @Function
     public static String id() {
-        return BasicFunction.pick(zips) +
-                DateFunction.datetime(DateUtils.DEFAULT_DATE_YYYYMMdd) +
+        return BasicFunction.pick(ZIPS) +
+                DateFunction.datetime(DateUtils.DEFAULT_DATE_YYYY_MM_DD) +
                 BasicFunction.string(CharacterEnum.number, 3) +
                 BasicFunction.character(CharacterEnum.number.getPool() + "X");
     }

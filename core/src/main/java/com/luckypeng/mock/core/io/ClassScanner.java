@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 public class ClassScanner {
+    private static final String PATH_DELIMITER = "/";
     /**
      * 查询指定包下带有指定注解的所有类
      * @param packageName
@@ -84,6 +85,8 @@ public class ClassScanner {
                         throw new RuntimeException("URLDecoder.decode URL 失败: ", e);
                     }
                     list = scanFile(filePath, packageName);
+                    break;
+                default:
                     break;
             }
         }
@@ -150,15 +153,16 @@ public class ClassScanner {
         // 得到目录下所有文件(目录)
         File[] files = f.listFiles();
         if (null != files) {
-            int LEN = files.length;
+            int fileLength = files.length;
 
-            for (int ix = 0 ; ix < LEN ; ++ix) {
+            for (int ix = 0 ; ix < fileLength ; ++ix) {
                 File file = files[ix];
 
                 // 判断是否还是一个目录
                 if (file.isDirectory()) {
                     // 递归遍历目录
-                    List<String> list = scanFile(file.getAbsolutePath(), concat(packageName, ".", file.getName()));
+                    List<String> list =
+                            scanFile(file.getAbsolutePath(), concat(packageName, ".", file.getName()));
                     classNameList.addAll(list);
 
                 } else if (file.getName().endsWith(ResourceType.CLASS_FILE.getTypeString())) {
@@ -189,10 +193,10 @@ public class ClassScanner {
      * @return
      */
     public static String pathToPackage(String path) {
-        if (path.startsWith("/")) {
+        if (path.startsWith(PATH_DELIMITER)) {
             path = path.substring(1);
         }
-        return path.replaceAll("/", ".");
+        return path.replaceAll(PATH_DELIMITER, ".");
     }
 
     /**

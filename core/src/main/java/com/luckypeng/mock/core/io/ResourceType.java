@@ -8,6 +8,9 @@ import lombok.Getter;
  */
 @Getter
 public enum ResourceType {
+    /**
+     * 资源类型：jar 包、文件目录、class 文件
+     */
     JAR("jar"),
     FILE("file"),
     CLASS_FILE(".class");

@@ -61,8 +61,9 @@ public class FunctionHelper {
             boolean isFit = true;
             Class[] classes = function.getMethod().getParameterTypes();
             // 参数个数检查
-            if ((ObjectUtils.isEmpty(params) && ObjectUtils.isEmpty(classes)) ||
-                    (params != null && params.length == classes.length)) {
+            boolean paramsMatched = (ObjectUtils.isEmpty(params) && ObjectUtils.isEmpty(classes)) ||
+                    (params != null && params.length == classes.length);
+            if (paramsMatched) {
                 for (int i = 0; params != null && i < params.length; i++) {
                     // 参数类型检查
                     if(!ParamType.isFitType(params[i], classes[i])) {

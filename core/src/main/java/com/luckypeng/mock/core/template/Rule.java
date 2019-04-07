@@ -39,7 +39,8 @@ public class Rule {
 
     private Integer step;
 
-    private static final Pattern RE_KEY = Pattern.compile("([^\\|]+)\\|?(?:\\+(\\d+)|([\\+-]?\\d+-?[\\+-]?\\d*)?(\\.\\d+-?\\d*)?)");
+    private static final Pattern RE_KEY =
+            Pattern.compile("([^\\|]+)\\|?(?:\\+(\\d+)|([\\+-]?\\d+-?[\\+-]?\\d*)?(\\.\\d+-?\\d*)?)");
     private static final Pattern RE_RANGE = Pattern.compile("([\\+-]?\\d+)-?([\\+-]?\\d+)?");
     private static final Pattern RE_PLACEHOLDER = Pattern.compile("@([^@#%&()\\?\\s]+)(\\((.*)\\))");
 
@@ -65,7 +66,8 @@ public class Rule {
                     rule.setMax(NumberUtils.parseLong(rangeMatcher.group(2)));
                 }
 
-                rule.setCount(rule.getMax() == null ? rule.getMin() : BasicFunction.integer(rule.getMin(), rule.getMax()));
+                rule.setCount(rule.getMax() == null ? rule.getMin() :
+                        BasicFunction.integer(rule.getMin(), rule.getMax()));
             }
 
             rule.setDecimal(matcher.group(4) != null);
@@ -76,7 +78,8 @@ public class Rule {
                     rule.setDMax(NumberUtils.parseInt(rangeMatcher.group(2)));
                 }
 
-                rule.setDCount(rule.getDMax() == null ? rule.getDMin() : (int) BasicFunction.integer(rule.getDMin(), rule.getDMax()));
+                rule.setDCount(rule.getDMax() == null ? rule.getDMin() :
+                        (int) BasicFunction.integer(rule.getDMin(), rule.getDMax()));
             }
         }
 
