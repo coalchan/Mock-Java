@@ -44,7 +44,7 @@ public class ParamType {
         type = getNonPrimitiveClass(type);
         switch (classType) {
             case INT:
-                return type == Integer.class || type == Long.class;
+                return type == Integer.class || type == Long.class || type == Double.class;
             case LONG:
                 return type == Long.class;
             case DOUBLE:

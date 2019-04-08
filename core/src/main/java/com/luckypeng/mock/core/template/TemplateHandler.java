@@ -132,19 +132,18 @@ public class TemplateHandler {
      * @param value
      * @return
      */
-    public static String handle(Rule rule, String value) {
-        String result = "";
-        value = handle(value);
+    public static Object handle(Rule rule, String value) {
+        Object placeholderResult = handle(value);
 
         if (!rule.isRange()) {
-            result = value;
+            return placeholderResult;
         } else {
+            String result = "";
             for (int i = 0; i < rule.getCount(); i++) {
-                result += value;
+                result += placeholderResult.toString();
             }
+            return result;
         }
-
-        return result;
     }
 
     /**
@@ -152,9 +151,9 @@ public class TemplateHandler {
      * @param value
      * @return
      */
-    public static String handle(String value) {
+    public static Object handle(String value) {
         if (Rule.isPlaceholder(value)) {
-            value = FunctionHelper.execFunction(value).toString();
+            return FunctionHelper.execFunction(value);
         }
         return value;
     }
