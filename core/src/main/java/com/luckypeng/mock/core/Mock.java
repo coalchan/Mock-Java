@@ -1,8 +1,12 @@
 package com.luckypeng.mock.core;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.luckypeng.mock.core.template.TemplateHandler;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.LinkedHashMap;
 
 /**
  * @author coalchan
@@ -44,6 +48,9 @@ public class Mock {
      * @return
      */
     public static JSONObject mock(String jsonTemplate) {
-        return TemplateHandler.handleTemplate(jsonTemplate);
+        LinkedHashMap<String, Object> map =
+                JSON.parseObject(jsonTemplate, new TypeReference<LinkedHashMap<String, Object>>(){});
+        JSONObject jsonObject = new JSONObject(map);
+        return mock(jsonObject);
     }
 }

@@ -1,9 +1,7 @@
 package com.luckypeng.mock.core.template;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.TypeReference;
 import com.luckypeng.mock.core.function.BasicFunction;
 import com.luckypeng.mock.core.function.util.FunctionHelper;
 import com.luckypeng.mock.core.util.NumberUtils;
@@ -11,29 +9,16 @@ import com.luckypeng.mock.core.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import static com.luckypeng.mock.core.function.BasicFunction.*;
-import static com.luckypeng.mock.core.util.NumberUtils.Operation.*;
+import static com.luckypeng.mock.core.util.NumberUtils.Operation.add;
 
 /**
  * @author coalchan
  * @date 2019/4/3
  */
 public class TemplateHandler {
-    /**
-     * JSON模板计算
-     * @param jsonTemplate
-     * @return
-     */
-    public static JSONObject handleTemplate(String jsonTemplate) {
-        LinkedHashMap<String, Object> map =
-                JSON.parseObject(jsonTemplate, new TypeReference<LinkedHashMap<String, Object>>(){});
-        JSONObject jsonObject = new JSONObject(map);
-        return handle(jsonObject);
-    }
-
     /**
      * KV模板计算
      * @param key
