@@ -16,7 +16,7 @@ public class WebFunction {
     /**
      * 协议簇
      */
-    private static final String[] PROTOCOLS = {
+    public static final String[] PROTOCOLS = {
             "http", "ftp", "gopher", "mailto", "mid",
             "cid", "news", "nntp", "prospero", "telnet",
             "rlogin", "tn3270", "wais"
@@ -83,7 +83,7 @@ public class WebFunction {
             "wf", "ws", "ye", "yu", "za", "zm", "zr", "zw"
     };
 
-    private static final String[] DOMAIN_SUFFIX = ArrayUtils.concatArrays(
+    public static final String[] DOMAIN_SUFFIX = ArrayUtils.concatArrays(
             COMMON_DOMAIN_SUFFIX, INTERNAL_DOMAIN_SUFFIX, INTERNAL_CN_DOMAIN_SUFFIX,
             NEW_INTERNATIONAL_DOMAIN_SUFFIX, OTHER_DOMAIN_SUFFIX
     );
