@@ -21,6 +21,8 @@ public class BasicFunction {
     public static final long DEFAULT_FLOAT_MAX = Long.MAX_VALUE;
     public static final int DEFAULT_FLOAT_D_MIN = 0;
     public static final int DEFAULT_FLOAT_D_MAX = 16;
+    public static final int DEFAULT_STRING_MIN = 3;
+    public static final int DEFAULT_STRING_MAX = 7;
 
     @Function(alias = {"boolean"})
     public static boolean bool() {
@@ -79,24 +81,24 @@ public class BasicFunction {
     }
 
     @Function(alias = {"char"})
-    public static Character character() {
+    public static char character() {
         return character(CharacterEnum.ALL);
     }
 
     @Function(alias = {"char"})
-    public static Character character(CharacterEnum characterEnum) {
+    public static char character(CharacterEnum characterEnum) {
         return character(characterEnum.getPool());
     }
 
     @Function(alias = {"char"})
-    public static Character character(String pool) {
+    public static char character(String pool) {
         pool = CharacterEnum.searchPool(pool);
         return pool.charAt((int) integer(0, pool.length() - 1));
     }
 
     @Function(alias = {"str"})
     public static String string() {
-        return string(3, 7);
+        return string(DEFAULT_STRING_MIN, DEFAULT_STRING_MAX);
     }
 
     @Function(alias = {"str"})
