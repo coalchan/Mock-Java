@@ -7,6 +7,7 @@ import com.luckypeng.mock.flink.serialization.LineMockDeserializationSchema;
 import lombok.Data;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -14,6 +15,7 @@ import org.junit.Test;
  * @date 2019/4/8
  */
 public class FlinkMockSourceTest {
+    @Ignore
     @Test
     public void test() throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
@@ -32,6 +34,7 @@ public class FlinkMockSourceTest {
         env.execute();
     }
 
+    @Ignore
     @Test
     public void testLine() throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
@@ -50,6 +53,7 @@ public class FlinkMockSourceTest {
         env.execute();
     }
 
+    @Ignore
     @Test
     public void testJSON() throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
