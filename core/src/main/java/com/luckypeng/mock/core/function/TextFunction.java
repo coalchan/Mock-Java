@@ -14,14 +14,14 @@ import org.apache.commons.lang3.StringUtils;
 public class TextFunction {
     private TextFunction() {}
 
-    private static final int DEFAULT_TITLE_MIN = 3;
-    private static final int DEFAULT_TITLE_MAX = 7;
-    private static final int DEFAULT_WORD_MIN = 3;
-    private static final int DEFAULT_WORD_MAX = 10;
-    private static final int DEFAULT_SENTENCE_MIN = 12;
-    private static final int DEFAULT_SENTENCE_MAX = 18;
-    private static final int DEFAULT_PARAGRAPH_MIN = 3;
-    private static final int DEFAULT_PARAGRAPH_MAX = 7;
+    public static final int DEFAULT_TITLE_MIN = 3;
+    public static final int DEFAULT_TITLE_MAX = 7;
+    public static final int DEFAULT_WORD_MIN = 3;
+    public static final int DEFAULT_WORD_MAX = 10;
+    public static final int DEFAULT_SENTENCE_MIN = 12;
+    public static final int DEFAULT_SENTENCE_MAX = 18;
+    public static final int DEFAULT_PARAGRAPH_MIN = 3;
+    public static final int DEFAULT_PARAGRAPH_MAX = 7;
 
     private static final String DICT_COMMON_CN =
             StringUtils.deleteWhitespace("的一是在不了有和人这中大为上个国我以要他时来用们生到作地于出就分对成会可主" +
