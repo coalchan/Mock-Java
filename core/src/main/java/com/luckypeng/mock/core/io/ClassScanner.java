@@ -131,6 +131,10 @@ public class ClassScanner {
 
             if(name.startsWith(packagePath) && name.endsWith(ResourceType.CLASS_FILE.getTypeString())) {
                 name = trimSuffix(name);
+                // 如果类名中有"$"不计算在内
+                if (-1 != name.lastIndexOf("$")) {
+                    continue;
+                }
                 name = pathToPackage(name);
 
                 classNameList.add(name);
@@ -205,7 +209,7 @@ public class ClassScanner {
      * @return
      */
     public static String packageToPath(String packageName) {
-        return packageName.replace(".", File.separator);
+        return packageName.replace(".", PATH_DELIMITER);
     }
 
     /**
