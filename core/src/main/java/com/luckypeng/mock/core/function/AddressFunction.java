@@ -21,7 +21,7 @@ public class AddressFunction {
             "东北", "华北", "华东", "华中", "华南", "西南", "西北"
     };
 
-    private static List<Province> CHINA = JSON.parseArray(ObjectUtils.fromFile("china.json"), Province.class);
+    public static List<Province> CHINA = JSON.parseArray(ObjectUtils.fromFile("china.json"), Province.class);
 
     @Function
     public static String region() {
