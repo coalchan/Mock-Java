@@ -2,7 +2,7 @@ package com.luckypeng.mock.core.util;
 
 /**
  * @author coalchan
- * @date 2019/4/3
+ * @since 1.0
  */
 public class AssertionUtils {
     private AssertionUtils() {}

@@ -4,7 +4,7 @@ import lombok.Getter;
 
 /**
  * @author coalchan
- * @date 2019/4/2
+ * @since 1.0
  */
 @Getter
 public enum ResourceType {

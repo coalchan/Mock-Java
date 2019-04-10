@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author coalchan
- * @date 2019/4/4
+ * @since 1.0
  */
 @Functions
 public class DateFunction {

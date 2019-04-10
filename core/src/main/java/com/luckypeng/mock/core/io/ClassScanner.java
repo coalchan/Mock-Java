@@ -16,17 +16,16 @@ import java.util.stream.Collectors;
 
 /**
  * @author coalchan
- * @date 2019/4/2
+ * @since 1.0
  */
 @Slf4j
 public class ClassScanner {
     private static final String PATH_DELIMITER = "/";
     /**
      * 查询指定包下带有指定注解的所有类
-     * @param packageName
-     * @param annotationClass
-     * @return
-     * @throws IOException
+     * @param packageName package's name
+     * @param annotationClass class of annotation
+     * @return classes with the annotation of {@code annotationClass} in {@code packageName}
      */
     public static List<Class> scan(String packageName, Class annotationClass) {
         List<Class> classes = scan(packageName);
@@ -38,8 +37,8 @@ public class ClassScanner {
 
     /**
      * 查询指定包下的所有类
-     * @param packageName
-     * @return
+     * @param packageName package's name
+     * @return classes in {@code packageName}
      */
     public static List<Class> scan(String packageName) {
         List<String> classNames = scanClass(packageName);
@@ -56,8 +55,8 @@ public class ClassScanner {
 
     /**
      * 查找指定包下的所有类名全称
-     * @param packageName
-     * @return
+     * @param packageName package's name
+     * @return class names in {@code packageName}
      */
     public static List<String> scanClass(String packageName) {
         String packagePath = packageToPath(packageName);
@@ -95,8 +94,8 @@ public class ClassScanner {
 
     /**
      * 根据URL判断是JAR包还是文件目录
-     * @param url
-     * @return
+     * @param url file url
+     * @return {@code ResourceType} of file
      */
     private static ResourceType determineType(URL url) {
         if (url.getProtocol().equals(ResourceType.FILE.getTypeString())) {
@@ -110,9 +109,9 @@ public class ClassScanner {
 
     /**
      * 扫描JAR文件
-     * @param path
-     * @return
-     * @throws IOException
+     * @param path file path
+     * @param packagePath package's path
+     * @return file names in {@code packagePath}
      */
     private static List<String> scanJar(String path, String packagePath) {
         JarFile jar;
@@ -146,7 +145,8 @@ public class ClassScanner {
 
     /**
      * 扫描文件目录下的类
-     * @param path
+     * @param path file dir
+     * @param packageName package's name
      * @return
      */
     private static List<String> scanFile(String path, String packageName) {
@@ -191,10 +191,8 @@ public class ClassScanner {
 
     /**
      * 把路径字符串转换为包名.
-     * a/b/c/d -> a.b.c.d
-     *
-     * @param path
-     * @return
+     * @param path package's path e.g. a/b/c/d
+     * @return package's name e.g. a.b.c.d
      */
     public static String pathToPackage(String path) {
         if (path.startsWith(PATH_DELIMITER)) {
@@ -205,8 +203,8 @@ public class ClassScanner {
 
     /**
      * 包名转换为路径名
-     * @param packageName
-     * @return
+     * @param packageName package's name e.g. a.b.c.d
+     * @return package's path e.g. a/b/c/d
      */
     public static String packageToPath(String packageName) {
         return packageName.replace(".", PATH_DELIMITER);
@@ -214,21 +212,21 @@ public class ClassScanner {
 
     /**
      * 将多个对象转换成字符串并连接起来
-     * @param objs
-     * @return
+     * @param objects multi objects
+     * @return a string by concat all objects
      */
-    public static String concat(Object... objs) {
+    public static String concat(Object... objects) {
         StringBuilder sb = new StringBuilder(30);
-        for (int ix = 0 ; ix < objs.length ; ++ix) {
-            sb.append(objs[ix]);
+        for (int ix = 0 ; ix < objects.length ; ++ix) {
+            sb.append(objects[ix]);
         }
         return sb.toString();
     }
 
     /**
      * 去掉文件的后缀名
-     * @param name
-     * @return
+     * @param name file's name
+     * @return class name
      */
     public static String trimSuffix(String name) {
         int dotIndex = name.indexOf('.');

@@ -8,7 +8,7 @@ import java.io.IOException;
 
 /**
  * @author coalchan
- * @date 2019/4/8
+ * @since 1.0
  */
 public class DefaultMockDeserializationSchema<T> implements MockDeserializationSchema<T> {
     private static final long serialVersionUID = -7810853850065207962L;

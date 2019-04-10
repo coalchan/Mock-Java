@@ -6,7 +6,7 @@ import com.luckypeng.mock.core.util.ArrayUtils;
 
 /**
  * @author coalchan
- * @date 2019/4/5
+ * @since 1.0
  */
 @Functions
 public class NameFunction {

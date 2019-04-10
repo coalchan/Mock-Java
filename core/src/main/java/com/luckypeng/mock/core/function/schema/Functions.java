@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * @author coalchan
- * @date 2019/4/2
+ * @since 1.0
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

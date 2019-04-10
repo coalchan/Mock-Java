@@ -2,7 +2,7 @@ package com.luckypeng.mock.core.util;
 
 /**
  * @author coalchan
- * @date 2019/4/5
+ * @since 1.0
  */
 public class NumberUtils {
     private NumberUtils() {}
@@ -32,10 +32,10 @@ public class NumberUtils {
 
     /**
      * 两个数字的四则运算，并返回具体类型计算的结果类型
-     * @param n1
-     * @param n2
-     * @param operation
-     * @return
+     * @param n1 number 1
+     * @param n2 number 2
+     * @param operation operation type
+     * @return compute result
      */
     public static Number compute(Number n1, Number n2, Operation operation) {
         Double d1 = null, d2 = null;

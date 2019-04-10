@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @author coalchan
- * @date 2019/4/2
+ * @since 1.0
  */
 @Functions
 public class BasicFunction {
@@ -161,9 +161,9 @@ public class BasicFunction {
 
     /**
      * 从数组中随机选取一个
-     * @param array
-     * @param <T>
-     * @return
+     * @param array array
+     * @param <T> type of element in array
+     * @return a random element in array
      */
     public static <T> T pick(T[] array) {
         return array[(int) integer(0, array.length - 1)];
@@ -171,9 +171,9 @@ public class BasicFunction {
 
     /**
      * 从列表中随机选取一个
-     * @param list
-     * @param <T>
-     * @return
+     * @param list list
+     * @param <T> type of element in array
+     * @return a random element in array
      */
     public static <T> T pick(List<T> list) {
         return list.get((int) integer(0, list.size() - 1));

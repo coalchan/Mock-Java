@@ -8,7 +8,7 @@ import java.util.Locale;
 
 /**
  * @author coalchan
- * @date 2019/4/4
+ * @since 1.0
  */
 public class DateUtils {
     private DateUtils() {}
@@ -35,10 +35,9 @@ public class DateUtils {
 
     /**
      * 将日期字符串转换为java.util.Date对象
-     * @param dateString
+     * @param dateString 日期字符串
      * @param pattern 日期格式
-     * @return
-     * @throws Exception
+     * @return 日期
      */
     public static Date toDate(String dateString, String pattern) {
         return DateTime.parse(dateString, DateTimeFormat.forPattern(pattern)).toDate();
@@ -46,9 +45,9 @@ public class DateUtils {
 
     /**
      * 将java.util.Date对象转换为字符串
-     * @param date
-     * @param pattern
-     * @return
+     * @param date 日期
+     * @param pattern 日期格式
+     * @return 日期字符串
      */
     public static String toDateTimeString(Date date, String pattern) {
         return new DateTime(date).toString(pattern, Locale.CHINESE);
@@ -56,8 +55,8 @@ public class DateUtils {
 
     /**
      * 时间戳转化
-     * @param ts
-     * @return
+     * @param ts 毫秒级时间戳
+     * @return 日期
      */
     public static Date fromTimeStamp(long ts) {
         return new DateTime(ts).toDate();

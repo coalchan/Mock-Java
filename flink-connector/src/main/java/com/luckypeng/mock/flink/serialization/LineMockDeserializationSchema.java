@@ -9,7 +9,7 @@ import java.io.IOException;
 
 /**
  * @author coalchan
- * @date 2019/4/9
+ * @since 1.0
  */
 public class LineMockDeserializationSchema implements MockDeserializationSchema<String> {
     private static final long serialVersionUID = -3674191250641373039L;

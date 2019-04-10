@@ -12,7 +12,7 @@ import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
  * @author coalchan
- * @date 2019/4/8
+ * @since 1.0
  */
 public class FlinkMockSource<T> extends RichParallelSourceFunction<T> implements ResultTypeQueryable<T> {
     private static final long serialVersionUID = 6488827819119578895L;

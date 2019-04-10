@@ -10,14 +10,14 @@ import java.util.LinkedHashMap;
 
 /**
  * @author coalchan
- * @date 2019/4/2
+ * @since 1.0
  */
 @Slf4j
 public class Mock {
     /**
      * 处理属性值（可能为占位符）
-     * @param value
-     * @return
+     * @param value value of property
+     * @return mock value
      */
     public static Object mockValue(Object value) {
         return TemplateHandler.handle(value);
@@ -25,9 +25,9 @@ public class Mock {
 
     /**
      * KV模板计算
-     * @param key
-     * @param value
-     * @return
+     * @param key name of property
+     * @param value value of property
+     * @return mock value
      */
     public static Object mock(String key, Object value) {
         return TemplateHandler.handle(key, value);
@@ -35,8 +35,8 @@ public class Mock {
 
     /**
      * 模板计算
-     * @param template
-     * @return
+     * @param template template with json object
+     * @return mock value
      */
     public static JSONObject mock(JSONObject template) {
         return TemplateHandler.handle(template);
@@ -44,8 +44,8 @@ public class Mock {
 
     /**
      * 模板计算
-     * @param jsonTemplate
-     * @return
+     * @param jsonTemplate template with json string
+     * @return mock value
      */
     public static JSONObject mock(String jsonTemplate) {
         LinkedHashMap<String, Object> map =

@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author coalchan
- * @date 2019/4/4
+ * @since 1.0
  */
 @Functions
 public class TextFunction {

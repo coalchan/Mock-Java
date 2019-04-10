@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * @author coalchan
- * @date 2019/4/3
+ * @since 1.0
  */
 public class ObjectUtils {
     public static boolean isEmpty(Object obj) {
@@ -43,8 +43,8 @@ public class ObjectUtils {
 
     /**
      * 读取文件到字符串
-     * @param fileName
-     * @return
+     * @param fileName relative path of file
+     * @return string of file
      */
     public static String fromFile(String fileName) {
         InputStream inputStream = ObjectUtils.class.getClassLoader().getResourceAsStream(fileName);

@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * @author coalchan
- * @date 2019/4/8
+ * @since 1.0
  */
 public interface MockDeserializationSchema<T> extends Serializable, ResultTypeQueryable<T> {
     /**
@@ -17,7 +17,7 @@ public interface MockDeserializationSchema<T> extends Serializable, ResultTypeQu
      * @param data Mock data, as a JSON Object.
      *
      * @return The deserialized message as an object (null if the message cannot be deserialized).
-     * @throws IOException
+     * @throws IOException exception while in deserializing data
      */
     T deserialize(JSONObject data) throws IOException;
 }

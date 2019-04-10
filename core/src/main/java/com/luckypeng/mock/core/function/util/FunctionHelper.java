@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author coalchan
- * @date 2019/4/2
+ * @since 1.0
  */
 @Slf4j
 public class FunctionHelper {
@@ -48,7 +48,7 @@ public class FunctionHelper {
     /**
      * 执行函数表达式
      * @param funcExpression 格式为 @func(p1 [, p2, ...])
-     * @return
+     * @return function result
      */
     public static Object execFunction(String funcExpression) {
         int bracketIndex = funcExpression.indexOf('(');

@@ -2,7 +2,7 @@ package com.luckypeng.mock.core.function.schema;
 
 /**
  * @author coalchan
- * @date 2019/4/3
+ * @since 1.0
  */
 public class ParamType {
     private static final int INT = 1;
@@ -35,9 +35,9 @@ public class ParamType {
 
     /**
      * 参数类型是否匹配
-     * @param value
-     * @param type
-     * @return
+     * @param value value with specific type
+     * @param type class type
+     * @return if value's type can fit class type then return true, else return false.
      */
     public static boolean isFitType(Object value, Class type) {
         int classType = getValueType(value);

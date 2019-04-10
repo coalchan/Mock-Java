@@ -16,25 +16,25 @@ import static com.luckypeng.mock.core.util.NumberUtils.Operation.add;
 
 /**
  * @author coalchan
- * @date 2019/4/3
+ * @since 1.0
  */
 public class TemplateHandler {
     /**
      * KV模板计算
-     * @param key
-     * @param value
-     * @return
+     * @param key name of property
+     * @param value value of property
+     * @return mock value
      */
     public static Object handle(String key, Object value) {
-        Rule rule = Rule.fromTemplate(key);
+        Rule rule = Rule.fromKey(key);
         return handle(rule, value);
     }
 
     /**
      * KV模板计算
-     * @param rule
-     * @param value
-     * @return
+     * @param rule rule of property's name
+     * @param value value of property
+     * @return mock value
      */
     public static Object handle(Rule rule, Object value) {
         if (value instanceof Boolean) {
@@ -54,8 +54,8 @@ public class TemplateHandler {
 
     /**
      * 处理属性值
-     * @param value
-     * @return
+     * @param value value of property
+     * @return mock value
      */
     public static Object handle(Object value) {
         if (value instanceof Boolean) {
@@ -75,9 +75,9 @@ public class TemplateHandler {
 
     /**
      * 属性值为布尔值，带有模板规则
-     * @param rule
-     * @param value
-     * @return
+     * @param rule rule of property's name
+     * @param value value of property
+     * @return mock value
      */
     public static boolean handle(Rule rule, boolean value) {
         return rule.isRange() ?
@@ -91,8 +91,8 @@ public class TemplateHandler {
 
     /**
      * 属性值为布尔值
-     * @param value
-     * @return
+     * @param value value of property
+     * @return mock value
      */
     public static boolean handle(boolean value) {
         return value;
@@ -100,9 +100,9 @@ public class TemplateHandler {
 
     /**
      * 属性值为数字，带有模板规则
-     * @param rule
-     * @param value
-     * @return
+     * @param rule rule of property's name
+     * @param value value of property
+     * @return mock value
      */
     public static Number handle(Rule rule, Number value) {
         if (rule.isDecimal()) {
@@ -119,8 +119,8 @@ public class TemplateHandler {
 
     /**
      * 属性值为数字
-     * @param value
-     * @return
+     * @param value value of property
+     * @return mock value
      */
     public static Number handle(Number value) {
         return value;
@@ -128,9 +128,9 @@ public class TemplateHandler {
 
     /**
      * 属性值为字符串（可能为占位符），带有模板规则
-     * @param rule
-     * @param value
-     * @return
+     * @param rule rule of property's name
+     * @param value value of property
+     * @return mock value
      */
     public static Object handle(Rule rule, String value) {
         Object placeholderResult = handle(value);
@@ -148,8 +148,8 @@ public class TemplateHandler {
 
     /**
      * 属性值为字符串（可能为占位符）
-     * @param value
-     * @return
+     * @param value value of property
+     * @return mock value
      */
     public static Object handle(String value) {
         if (Rule.isPlaceholder(value)) {
@@ -160,9 +160,9 @@ public class TemplateHandler {
 
     /**
      * 属性值为JSON对象，带有模板规则
-     * @param rule
-     * @param value
-     * @return
+     * @param rule rule of property's name
+     * @param value value of property
+     * @return mock value
      */
     public static JSONObject handle(Rule rule, JSONObject value) {
         if (value.isEmpty()) {
@@ -186,8 +186,8 @@ public class TemplateHandler {
 
     /**
      * 属性值为JSON对象
-     * @param value
-     * @return
+     * @param value value of property
+     * @return mock value
      */
     public static JSONObject handle(JSONObject value) {
         if (value.isEmpty()) {
@@ -196,7 +196,7 @@ public class TemplateHandler {
         JSONObject result = new JSONObject(value.size(), true);
         value.entrySet().stream()
                 .forEach(kv -> {
-                    Rule subRule = Rule.fromTemplate(kv.getKey());
+                    Rule subRule = Rule.fromKey(kv.getKey());
                     result.put(subRule.getKey(), handle(subRule, kv.getValue()));
                     if (subRule.getStep() != null && value.get(kv.getKey()) instanceof Number) {
                         // 有步长时增加 value，以便下一次递增
@@ -209,9 +209,9 @@ public class TemplateHandler {
 
     /**
      * 属性值为JSON数组，带有模板规则
-     * @param rule
-     * @param value
-     * @return
+     * @param rule rule of property's name
+     * @param value value of property
+     * @return mock value
      */
     public static Object handle(Rule rule, JSONArray value) {
         if (value.isEmpty()) {
@@ -237,8 +237,8 @@ public class TemplateHandler {
 
     /**
      * 属性值为JSON数组
-     * @param value
-     * @return
+     * @param value value of property
+     * @return mock value
      */
     public static JSONArray handle(JSONArray value) {
         JSONArray result = new JSONArray();

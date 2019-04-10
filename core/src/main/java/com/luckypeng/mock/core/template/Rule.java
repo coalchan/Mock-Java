@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author coalchan
- * @date 2019/4/3
+ * @since 1.0
  */
 @Data
 public class Rule {
@@ -46,12 +46,12 @@ public class Rule {
 
     /**
      * 解析模板
-     * @param template
-     * @return
+     * @param key name of property
+     * @return rule of property's name
      */
-    public static Rule fromTemplate(String template) {
+    public static Rule fromKey(String key) {
         Rule rule = new Rule();
-        Matcher matcher = RE_KEY.matcher(template);
+        Matcher matcher = RE_KEY.matcher(key);
 
         if (matcher.find()) {
             rule.setKey(matcher.group(1));
@@ -88,8 +88,8 @@ public class Rule {
 
     /**
      * 是否为占位符
-     * @param value
-     * @return
+     * @param value value of property
+     * @return if it is a placeholder return true else return false
      */
     public static boolean isPlaceholder(String value) {
         Matcher matcher = RE_PLACEHOLDER.matcher(value);

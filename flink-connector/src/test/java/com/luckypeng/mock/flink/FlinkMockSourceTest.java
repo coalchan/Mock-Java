@@ -12,7 +12,7 @@ import org.junit.Test;
 
 /**
  * @author coalchan
- * @date 2019/4/8
+ * @since 1.0
  */
 public class FlinkMockSourceTest {
     @Ignore

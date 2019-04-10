@@ -2,7 +2,7 @@ package com.luckypeng.mock.core.util;
 
 /**
  * @author coalchan
- * @date 2019/4/5
+ * @since 1.0
  */
 public class ArrayUtils extends org.apache.commons.lang3.ArrayUtils {
     public static <T> T[] concatArrays(T[]... arrays) {
