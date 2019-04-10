@@ -43,7 +43,7 @@ public class BasicFunctionTest {
         for (int i = 0; i < 100; i++) {
             assertThat(decimal(10, 10, 2), greaterThan(10.0));
             assertThat(decimal(10, 10, 2, 4),
-                    allOf(greaterThan(10.0), lessThan(10.9999)));
+                    allOf(greaterThanOrEqualTo(10.0), lessThanOrEqualTo(10.9999)));
         }
     }
 
