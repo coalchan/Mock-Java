@@ -43,7 +43,7 @@ public class DateFunction {
 
     @Function
     public static String now() {
-        return now(DateUtils.DEFAULT_DATETIME_PATTERN);
+        return now(DateUnit.second.name());
     }
 
     @Function

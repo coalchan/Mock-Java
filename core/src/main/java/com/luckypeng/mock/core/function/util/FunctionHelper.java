@@ -78,7 +78,7 @@ public class FunctionHelper {
                 try {
                     return function.getMethod().invoke(null, params);
                 } catch (IllegalAccessException|InvocationTargetException e) {
-                    throw new RuntimeException("函数执行出错: " + funcName);
+                    throw new RuntimeException("函数执行出错: " + funcName, e);
                 }
             }
         }
