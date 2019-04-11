@@ -7,7 +7,7 @@
     <groupId>com.luckypeng.mock</groupId>
     <artifactId>mock-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <name>mock-java</name>
     <description>A Java version tool of Mock.js</description>
@@ -39,6 +39,7 @@
     </modules>
 
     <properties>
+        <project.version>1.0</project.version>
         <java.version>1.8</java.version>
         <flink.version>1.7.2</flink.version>
         <scala.binary.version>2.11</scala.binary.version>
