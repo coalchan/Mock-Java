@@ -4,6 +4,7 @@ import com.luckypeng.mock.core.util.ObjectUtils;
 import lombok.Data;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -12,6 +13,7 @@ import org.junit.Test;
  */
 public class PageViewTest {
     @Test
+    @Ignore
     public void test() throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         String template = ObjectUtils.fromFile("template/page-view.json");
