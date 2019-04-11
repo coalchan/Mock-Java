@@ -16,9 +16,6 @@ public class LineMockDeserializationSchema implements MockDeserializationSchema<
 
     private static final String DEFAULT_DELIMITER = "\u0001";
 
-    /**
-     * 分隔符
-     */
     private String delimiter;
 
     public LineMockDeserializationSchema() {

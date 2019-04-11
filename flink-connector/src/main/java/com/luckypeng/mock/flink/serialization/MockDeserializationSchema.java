@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 public interface MockDeserializationSchema<T> extends Serializable, ResultTypeQueryable<T> {
     /**
-     * Deserializes the byte message.
+     * Deserializes the json data.
      *
      * @param data Mock data, as a JSON Object.
      *
