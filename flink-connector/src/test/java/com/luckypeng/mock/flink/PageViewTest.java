@@ -15,8 +15,8 @@ public class PageViewTest {
     public void test() throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         String template = ObjectUtils.fromFile("template/page-view.json");
-        FlinkMockSource<PageView> source = new FlinkMockSource(template, PageView.class);
-        source.setRate(100);
+        FlinkMockSource<PageView> source = new FlinkMockSource(template, PageView.class)
+                .setRate(100).setMaxDelayMsecs(10);
         DataStream<PageView> dataStream = env.addSource(source);
         dataStream.print();
         env.execute();
