@@ -21,6 +21,20 @@ public class DateFunction {
     private static final Pattern RE_UNIT = Pattern.compile("year|month|day|hour|minute|second|week");
 
     @Function
+    public static long timestamp() {
+        return timestamp(false);
+    }
+
+    @Function
+    public static long timestamp(boolean isNow) {
+        if (isNow) {
+            return System.currentTimeMillis();
+        } else {
+            return BasicFunction.integer(0, System.currentTimeMillis());
+        }
+    }
+
+    @Function
     public static String datetime() {
         return datetime(DateUtils.DEFAULT_DATETIME_PATTERN);
     }
