@@ -5,6 +5,7 @@ import com.luckypeng.mock.core.function.schema.Functions;
 import com.luckypeng.mock.core.function.schema.Function;
 import com.luckypeng.mock.core.function.schema.MockFunction;
 import com.luckypeng.mock.core.function.schema.ParamType;
+import com.luckypeng.mock.core.template.Rule;
 import com.luckypeng.mock.core.util.AssertionUtils;
 import com.luckypeng.mock.core.util.ObjectUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -51,9 +52,9 @@ public class FunctionHelper {
      * @return function result
      */
     public static Object execFunction(String funcExpression) {
-        int bracketIndex = funcExpression.indexOf('(');
-        String funcName = funcExpression.substring(1, bracketIndex);
-        Object[] params = resolveParams(funcExpression.substring(bracketIndex+1, funcExpression.length()-1));
+        String[] functionAndParams = Rule.parsePlaceholder(funcExpression);
+        String funcName = functionAndParams[0];
+        Object[] params = resolveParams(functionAndParams[1]);
 
         List<MockFunction> functions = MOCK_FUNCTIONS.get(funcName);
         AssertionUtils.notEmpty(functions, "不支持该函数: " + funcName);

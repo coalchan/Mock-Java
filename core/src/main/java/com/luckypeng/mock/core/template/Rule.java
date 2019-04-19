@@ -1,6 +1,7 @@
 package com.luckypeng.mock.core.template;
 
 import com.luckypeng.mock.core.function.BasicFunction;
+import com.luckypeng.mock.core.util.AssertionUtils;
 import com.luckypeng.mock.core.util.NumberUtils;
 import lombok.Data;
 
@@ -42,7 +43,7 @@ public class Rule {
     private static final Pattern RE_KEY =
             Pattern.compile("([^\\|]+)\\|?(?:\\+(\\d+)|([\\+-]?\\d+-?[\\+-]?\\d*)?(\\.\\d+-?\\d*)?)");
     private static final Pattern RE_RANGE = Pattern.compile("([\\+-]?\\d+)-?([\\+-]?\\d+)?");
-    private static final Pattern RE_PLACEHOLDER = Pattern.compile("@([^@#%&()\\?\\s]+)(\\((.*)\\))");
+    private static final Pattern RE_PLACEHOLDER = Pattern.compile("@([^@#%&()\\?\\s]+)(\\((.*)\\))?");
 
     /**
      * 解析模板
@@ -94,5 +95,17 @@ public class Rule {
     public static boolean isPlaceholder(String value) {
         Matcher matcher = RE_PLACEHOLDER.matcher(value);
         return matcher.matches();
+    }
+
+    /**
+     * 解析占位符得到函数及参数
+     * @param value placeholder
+     * @return array of function name and it's params
+     */
+    public static String[] parsePlaceholder(String value) {
+        Matcher matcher = RE_PLACEHOLDER.matcher(value);
+        AssertionUtils.isTrue(matcher.find(), "该字符串不是占位符: " + value);
+        String params = matcher.group(2);
+        return new String[]{matcher.group(1), params == null ? "" : params.substring(1, params.length() - 1)};
     }
 }
