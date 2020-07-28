@@ -179,6 +179,16 @@ public class BasicFunction {
         return list.get((int) integer(0, list.size() - 1));
     }
 
+    /**
+     * 从数组中随机选取一个
+     * @param array
+     * @return
+     */
+    @Function(alias = "pick")
+    public static Object pickOne(Object[] array) {
+        return pick(array);
+    }
+
     @Getter
     public enum CharacterEnum {
         /**

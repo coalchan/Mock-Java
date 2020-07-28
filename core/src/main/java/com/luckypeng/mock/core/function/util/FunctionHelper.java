@@ -91,19 +91,39 @@ public class FunctionHelper {
      * @return
      */
     private static Object[] resolveParams(String paramStr) {
-        Object[] params = null;
-        if (StringUtils.isNotEmpty(paramStr)) {
-            String[] paramStrArray = paramStr.split(" *, *");
-            params = new Object[paramStrArray.length];
-            for (int i = 0; i < paramStrArray.length; i++) {
-                paramStrArray[i] = paramStrArray[i].trim();
-                if (paramStrArray[i].charAt(0) == '\'') {
-                    // 函数参数为字符串
-                    params[i] = paramStrArray[i].substring(1, paramStrArray[i].length()-1);
-                } else {
-                    // 其他
-                    params[i] = ParamType.toSpecificType(paramStrArray[i]);
-                }
+        if (StringUtils.isEmpty(paramStr)) {
+            return null;
+        } else if (paramStr.startsWith("[")) {
+            // 数组类型
+            AssertionUtils.isTrue(paramStr.endsWith("]") && paramStr.length() > 2,
+                    "参数为数组时必须以[]进行包裹且数组不为空");
+            Object[] params = splitParams(paramStr.substring(1, paramStr.length() - 1));
+            return new Object[]{params};
+        } else {
+            Object[] params = splitParams(paramStr);
+            return params;
+        }
+    }
+
+    /**
+     * 切分逗号分隔的参数
+     * @param paramStr
+     * @return
+     */
+    private static Object[] splitParams(String paramStr) {
+        if (ObjectUtils.isEmpty(paramStr)) {
+            return new Object[]{};
+        }
+        String[] paramStrArray = paramStr.split(" *, *");
+        Object[] params = new Object[paramStrArray.length];
+        for (int i = 0; i < paramStrArray.length; i++) {
+            paramStrArray[i] = paramStrArray[i].trim();
+            if (paramStrArray[i].charAt(0) == '\'') {
+                // 函数参数为字符串
+                params[i] = paramStrArray[i].substring(1, paramStrArray[i].length()-1);
+            } else {
+                // 其他
+                params[i] = ParamType.toSpecificType(paramStrArray[i]);
             }
         }
         return params;

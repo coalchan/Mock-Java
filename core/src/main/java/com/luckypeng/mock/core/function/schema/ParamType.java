@@ -10,6 +10,7 @@ public class ParamType {
     private static final int DOUBLE = 3;
     private static final int BOOLEAN = 4;
     private static final int STRING = 5;
+    private static final int OBJECT_ARRAY = 6;
 
     private static final String TRUE = "true";
     private static final String FALSE = "false";
@@ -53,6 +54,8 @@ public class ParamType {
                 return type == Boolean.class;
             case STRING:
                 return type == String.class;
+            case OBJECT_ARRAY:
+                return type == Object[].class;
             default:
                 return false;
         }
@@ -69,6 +72,8 @@ public class ParamType {
             return BOOLEAN;
         } else if (value instanceof String) {
             return STRING;
+        } else if (value instanceof Object[]) {
+            return OBJECT_ARRAY;
         } else {
             throw new RuntimeException("不支持该数据类型的解析: " + value);
         }
