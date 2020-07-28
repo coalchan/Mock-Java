@@ -62,16 +62,16 @@ public class AddressFunction {
     public static String zip() {
         return BasicFunction.string(CharacterEnum.number, 6);
     }
-}
 
-@Data
-class Province {
-    private String name;
-    private List<City> city;
-}
+    @Data
+    public static class Province {
+        private String name;
+        private List<City> city;
+    }
 
-@Data
-class City {
-    private String name;
-    private List<String> area;
+    @Data
+    public static class City {
+        private String name;
+        private List<String> area;
+    }
 }
