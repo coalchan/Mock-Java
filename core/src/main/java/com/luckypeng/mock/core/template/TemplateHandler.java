@@ -248,7 +248,7 @@ public class TemplateHandler {
     }
 
     /**
-     * 属性值为JSON对象
+     * 将规则模板按照指定的 key 进行排序，同时去掉不再排序参考 sortedKeys 中的 key
      * @param template value of property
      * @param sortedKeys sorted dict of key
      * @return sorted template
