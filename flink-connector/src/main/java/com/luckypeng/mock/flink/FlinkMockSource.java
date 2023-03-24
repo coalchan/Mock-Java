@@ -1,9 +1,8 @@
 package com.luckypeng.mock.flink;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.TypeReference;
 import com.luckypeng.mock.core.Mock;
+import com.luckypeng.mock.core.util.JsonUtils;
 import com.luckypeng.mock.flink.serialization.DefaultMockDeserializationSchema;
 import com.luckypeng.mock.flink.serialization.MockDeserializationSchema;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
@@ -11,7 +10,6 @@ import org.apache.flink.api.java.typeutils.ResultTypeQueryable;
 import org.apache.flink.shaded.guava18.com.google.common.util.concurrent.RateLimiter;
 import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
 
-import java.util.LinkedHashMap;
 import java.util.Random;
 
 import static org.apache.flink.util.Preconditions.checkNotNull;
@@ -48,7 +46,7 @@ public class FlinkMockSource<T> extends RichParallelSourceFunction<T> implements
 
     public FlinkMockSource(String template, Class<T> clazz) {
         checkNotNull(template, "template cannot be null");
-        this.template = fromJsonString(template);
+        this.template = JsonUtils.toJson(template);
         this.deserializer = new DefaultMockDeserializationSchema(clazz);
     }
 
@@ -125,16 +123,5 @@ public class FlinkMockSource<T> extends RichParallelSourceFunction<T> implements
     @Override
     public TypeInformation<T> getProducedType() {
         return deserializer.getProducedType();
-    }
-
-    /**
-     * json string to json object
-     * @param jsonTemplate json string
-     * @return json object
-     */
-    private JSONObject fromJsonString(String jsonTemplate) {
-        LinkedHashMap<String, Object> map =
-                JSON.parseObject(jsonTemplate, new TypeReference<LinkedHashMap<String, Object>>(){});
-        return new JSONObject(map);
     }
 }

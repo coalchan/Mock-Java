@@ -1,14 +1,14 @@
 package com.luckypeng.mock.core;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.TypeReference;
 import com.luckypeng.mock.core.template.TemplateHandler;
+import com.luckypeng.mock.core.util.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
+ * TODO 设计一个初始化规则的工具类，后续的每次生成模拟数据避免再次多余的规则解析，正则匹配等，从而应对大数据量生成时的效率，预计大改
  * @author coalchan
  * @since 1.0
  */
@@ -48,9 +48,18 @@ public class Mock {
      * @return mock value
      */
     public static JSONObject mock(String jsonTemplate) {
-        LinkedHashMap<String, Object> map =
-                JSON.parseObject(jsonTemplate, new TypeReference<LinkedHashMap<String, Object>>(){});
-        JSONObject jsonObject = new JSONObject(map);
+        JSONObject jsonObject = JsonUtils.toJson(jsonTemplate);
         return mock(jsonObject);
+    }
+
+    /**
+     * 模板计算
+     * @param jsonTemplate template with json string
+     * @param sortedKeys sorted keys, may be less than keys in template
+     * @return
+     */
+    public static JSONObject mock(String jsonTemplate, List<String> sortedKeys) {
+        JSONObject sortedTemplate = TemplateHandler.sortedTemplate(JsonUtils.toJson(jsonTemplate), sortedKeys);
+        return mock(sortedTemplate);
     }
 }

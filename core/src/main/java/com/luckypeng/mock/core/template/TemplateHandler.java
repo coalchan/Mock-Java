@@ -7,9 +7,9 @@ import com.luckypeng.mock.core.function.util.FunctionHelper;
 import com.luckypeng.mock.core.util.NumberUtils;
 import com.luckypeng.mock.core.util.ObjectUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static com.luckypeng.mock.core.function.BasicFunction.*;
 import static com.luckypeng.mock.core.util.NumberUtils.Operation.add;
@@ -245,5 +245,27 @@ public class TemplateHandler {
         value.stream()
                 .forEach(json -> result.add(handle(json)));
         return result;
+    }
+
+    /**
+     * 属性值为JSON对象
+     * @param template value of property
+     * @param sortedKeys sorted dict of key
+     * @return sorted template
+     */
+    public static JSONObject sortedTemplate(JSONObject template, List<String> sortedKeys) {
+        Map<String, Integer> sortDict = IntStream.range(0, sortedKeys.size())
+                .mapToObj(i -> new Object[]{i, sortedKeys.get(i)})
+                .collect(Collectors.toMap(array -> (String) (array[1]), array -> (int)(array[0])));
+
+        template.entrySet().removeIf(entry -> !sortDict.containsKey(Rule.fromKey(entry.getKey()).getKey()));
+
+        Map<String, Object> sortedMap = template.entrySet().stream().sorted((e1, e2) -> {
+            Rule subRule1 = Rule.fromKey(e1.getKey());
+            Rule subRule2 = Rule.fromKey(e2.getKey());
+            return sortDict.get(subRule1.getKey()) - sortDict.get(subRule2.getKey());
+        }).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldVal, newVal) -> oldVal, LinkedHashMap::new));
+
+        return new JSONObject(sortedMap);
     }
 }
