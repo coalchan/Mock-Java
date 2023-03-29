@@ -37,6 +37,7 @@
         <module>core</module>
         <module>flink-connector</module>
         <module>spark-connector</module>
+        <module>cli</module>
     </modules>
 
     <properties>
