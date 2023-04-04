@@ -27,3 +27,5 @@
 logs/
 
 plugins/
+
+dependency-reduced-pom.xml

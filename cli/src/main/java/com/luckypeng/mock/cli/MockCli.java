@@ -27,7 +27,7 @@ public class MockCli {
         options.addOption("h", "help", false, "显示帮助信息");
         options.addRequiredOption("t", "template", true, "mock数据的JSON模板");
         options.addRequiredOption("c", "count", true, "生成数据条数");
-        options.addOption("f", "format", true, "输出格式，支持 JSON、TSV");
+        options.addOption("f", "format", true, "输出格式，支持 JSON、TSV、CSV");
 
         CommandLineParser parser = new DefaultParser();
         try {
