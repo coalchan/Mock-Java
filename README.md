@@ -23,7 +23,7 @@ Inspired by [Mock.js](https://github.com/nuysoft/Mock)，并与此做了更多�
 ```xml
 <dependency>
     <groupId>com.luckypeng.mock</groupId>
-    <artifactId>mock-java</artifactId>
+    <artifactId>mock-spark-connector</artifactId>
     <version>1.1</version>
 </dependency>
 ```
@@ -35,7 +35,7 @@ Inspired by [Mock.js](https://github.com/nuysoft/Mock)，并与此做了更多�
 ```xml
 <dependency>
     <groupId>com.luckypeng.mock</groupId>
-    <artifactId>mock-java</artifactId>
+    <artifactId>mock-flink-connector</artifactId>
     <version>1.1</version>
 </dependency>
 ```
