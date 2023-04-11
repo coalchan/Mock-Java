@@ -15,6 +15,7 @@ public class ValueConverters {
     public static final Function<String, Long> LONG_CONVERTER = value -> value == null ? null : Long.parseLong(value);
     public static final Function<String, Float> FLOAT_CONVERTER = value -> value == null ? null : Float.parseFloat(value);
     public static final Function<String, Double> DOUBLE_CONVERTER = value -> value == null ? null : Double.parseDouble(value);
+    public static final Function<String, Boolean> BOOLEAN_CONVERTER = value -> value == null ? null : Boolean.parseBoolean(value);
     public static final Function<String, UTF8String> UTF8_STRING_CONVERTER = UTF8String::fromString;
 
     public static Function<String, ?>[] getConverters(StructType schema) {
@@ -32,6 +33,8 @@ public class ValueConverters {
                 valueConverters[i] = DOUBLE_CONVERTER;
             } else if (field.dataType().equals(DataTypes.StringType)) {
                 valueConverters[i] = UTF8_STRING_CONVERTER;
+            } else if (field.dataType().equals(DataTypes.BooleanType)) {
+                valueConverters[i] = BOOLEAN_CONVERTER;
             } else {
                 throw new IllegalArgumentException("暂不支持类型" + field.dataType().typeName());
             }
