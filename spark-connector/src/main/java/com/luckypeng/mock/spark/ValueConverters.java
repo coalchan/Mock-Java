@@ -1,8 +1,6 @@
 package com.luckypeng.mock.spark;
 
-import org.apache.spark.sql.types.DataTypes;
-import org.apache.spark.sql.types.StructField;
-import org.apache.spark.sql.types.StructType;
+import org.apache.spark.sql.types.*;
 import org.apache.spark.unsafe.types.UTF8String;
 
 import java.sql.Timestamp;
@@ -19,6 +17,7 @@ public class ValueConverters {
     public static final Function<String, Boolean> BOOLEAN_CONVERTER = value -> value == null ? null : Boolean.parseBoolean(value);
     public static final Function<String, Long> TIMESTAMP_CONVERTER = value -> value == null ? null : Timestamp.valueOf(value).getTime() * 1000;
     public static final Function<String, UTF8String> UTF8_STRING_CONVERTER = UTF8String::fromString;
+    public static final Function<String, Decimal> DECIMAL_CONVERTER = value -> value == null ? null : Decimal.apply(value);
 
     public static Function<String, ?>[] getConverters(StructType schema) {
         StructField[] fields = schema.fields();
@@ -39,6 +38,8 @@ public class ValueConverters {
                 valueConverters[i] = BOOLEAN_CONVERTER;
             } else if (field.dataType().equals(DataTypes.TimestampType)) {
                 valueConverters[i] = TIMESTAMP_CONVERTER;
+            } else if (field.dataType() instanceof DecimalType) {
+                valueConverters[i] = DECIMAL_CONVERTER;
             } else {
                 throw new IllegalArgumentException("暂不支持类型" + field.dataType().typeName());
             }
