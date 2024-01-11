@@ -12,7 +12,7 @@ Inspired by [Mock.js](https://github.com/nuysoft/Mock)，并与此做了更多�
 <dependency>
     <groupId>com.luckypeng.mock</groupId>
     <artifactId>mock-java</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
 </dependency>
 ```
 
@@ -24,7 +24,7 @@ Inspired by [Mock.js](https://github.com/nuysoft/Mock)，并与此做了更多�
 <dependency>
     <groupId>com.luckypeng.mock</groupId>
     <artifactId>mock-spark-connector</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
 </dependency>
 ```
 
@@ -36,7 +36,7 @@ Inspired by [Mock.js](https://github.com/nuysoft/Mock)，并与此做了更多�
 <dependency>
     <groupId>com.luckypeng.mock</groupId>
     <artifactId>mock-flink-connector</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
 </dependency>
 ```
 
