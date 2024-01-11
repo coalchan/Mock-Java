@@ -44,7 +44,7 @@ Inspired by [Mock.js](https://github.com/nuysoft/Mock)，并与此做了更多�
 
 ### 使用 cli
 
-1. 下载 [Jar](https://repo1.maven.org/maven2/com/luckypeng/mock/mock-cli/1.1/mock-cli-1.1-executable.jar)
-2. `mv mock-cli-1.1-executable.jar mock-cli`
+1. 下载 [Jar](https://repo1.maven.org/maven2/com/luckypeng/mock/mock-cli/1.2/mock-cli-1.2-executable.jar)
+2. `mv mock-cli-1.2-executable.jar mock-cli`
 3. `chmod +x mock-cli`
 4. `mock-cli --help`
