@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 public class MockPartitionReader implements PartitionReader<InternalRow> {
     private final JSONObject template;
     private final int total;
-    private final Function<String, ?>[] valueConverters;
+    private final Function<Object, ?>[] valueConverters;
     private int count;
     private int columnCount;
     private StructType schema;
@@ -55,7 +55,7 @@ public class MockPartitionReader implements PartitionReader<InternalRow> {
             Collection<Object> values = data.values();
             int k = 0;
             for (Object value : values) {
-                convertedValues[k] = valueConverters[k].apply(value.toString());
+                convertedValues[k] = valueConverters[k].apply(value);
                 k++;
             }
         } else {
@@ -63,7 +63,7 @@ public class MockPartitionReader implements PartitionReader<InternalRow> {
             for (int i = 0; i < columnCount; i++) {
                 Object value = data.get(schema.apply(i).name());
                 if (value != null) {
-                    value = valueConverters[i].apply(value.toString());
+                    value = valueConverters[i].apply(value);
                 }
                 convertedValues[i] = value;
             }
