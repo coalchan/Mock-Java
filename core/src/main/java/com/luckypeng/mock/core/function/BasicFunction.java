@@ -1,5 +1,6 @@
 package com.luckypeng.mock.core.function;
 
+import com.alibaba.fastjson.JSONArray;
 import com.luckypeng.mock.core.function.schema.Functions;
 import com.luckypeng.mock.core.function.schema.Function;
 import lombok.Getter;
@@ -187,6 +188,22 @@ public class BasicFunction {
     @Function(alias = "pick")
     public static Object pickOne(Object[] array) {
         return pick(array);
+    }
+
+    /**
+     * 从数组中随机选取几个得到一个新数组
+     * @param array
+     * @return
+     */
+    @Function
+    public static JSONArray combine(Object[] array) {
+        JSONArray result = new JSONArray();
+        assert array.length >= 1;
+        int length = (int) integer(1, array.length - 1);
+        for (int i = 0; i < length; i++) {
+            result.add(array[(int) integer(0, array.length - 1)]);
+        }
+        return result;
     }
 
     @Getter

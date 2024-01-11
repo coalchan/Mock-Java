@@ -1,5 +1,6 @@
 package com.luckypeng.mock.core;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.luckypeng.mock.core.function.BasicFunction;
 import com.luckypeng.mock.core.template.TemplateHandler;
@@ -38,6 +39,23 @@ public class MockTest {
         for (int i = 0; i < 100; i++) {
             Object value = Mock.mockValue("@pick(" + array.toString() + ")");
             assertThat(value, isIn(actualList));
+        }
+    }
+
+    @Test
+    public void testCombine() {
+        List<Object> array = Arrays.asList(1, "'abc'", 3.14, true, 1234567890000000000L);
+        List<Object> actualList = array.stream()
+                .map(obj -> obj instanceof String? obj.toString().substring(1, obj.toString().length() - 1) : obj)
+                .collect(Collectors.toList());
+
+        for (int i = 0; i < 100; i++) {
+            Object value = Mock.mockValue("@combine(" + array.toString() + ")");
+            assertTrue(value instanceof JSONArray);
+            JSONArray jsonArray = (JSONArray) value;
+            for (int j = 0; j < jsonArray.size(); j++) {
+                assertThat(jsonArray.get(j), isIn(actualList));
+            }
         }
     }
 
